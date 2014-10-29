@@ -1,0 +1,31 @@
+Sprint #1 Report
+Light Orb
+Blinky Lights
+10/28/2014
+
+What things should we stop doing?
+We should keep our scrum meetings shorter by not going into details. Also, we must stop waiting to complete team documents like SCRUM Board, Burnup Chart and Status Reports until the last minute.
+
+What things should we start doing?
+Although we almost completed all tasks for Sprint 1, we were slow to adopt Agile tools such as the SCRUM Board and Burnup Chart to benefit our efforts as a team. During sprint 2, we will use these tools from the start as well as:
+- We will start documenting early and often. 
+- We should keep a list of things to turn in and what we need to do by a certain date. 
+- We need to establish regular team working hours in the Lab.  We weren’t able to do this until recently.
+- We must improve updating SCRUM Board and Burnup Chart in a timely manner, so that progress is more visible to all the team members while the sprint progresses.
+
+What is working well that we should continue to do?
+- Holding SCRUM meetings regularly, 3 times a week.
+- Communicating every day on the facebook group forum.
+- Sharing ideas that come up while we are working that will benefit the release of the product.
+
+Work completed:
+- As a user I want a companion application that can conveniently generate media in a format compatible with the LED orb, so that media can be displayed on the LED Orb. (All tasks complete)
+
+Work not completed:
+- As a user I want to see an image appear on the LED orb, so that the LED orb may be used as a display. (The motor controller task remains incomplete, however it is not essential to continued progress of the project or the goal of this user story.  Task has been pushed back to “polishing” during sprint 3.)
+
+Work completion rate:
+- total number of user stories completed during sprint: first user story at least 50% done. Second user story completely done.
+- total number of estimated ideal work hours completed during the prior sprint: 25 hours
+- total number of days during the prior sprint: 14 days
+- Two user stories within 14 days. We had 29 possibly story points to complete. We spent 25 hours during the first sprint. Actual rates of work is 2.07. Our ideal work hours/day is approximately 1.79 hours per day.
