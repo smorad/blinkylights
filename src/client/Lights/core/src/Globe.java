@@ -41,7 +41,7 @@ public class Globe
 
 
 	private Mesh mesh;
-    private ShaderProgram shader;
+  private ShaderProgram shader;
 	private int columns;
 	private int rows;
 	private float rotation = 90;
@@ -76,13 +76,11 @@ public class Globe
 
 		shader = new ShaderProgram
 		(
-                Gdx.files.internal("PositionTextureColor.vs").readString(),
-                Gdx.files.internal("PositionTextureColor.fs").readString()
-                
-        );
+      Gdx.files.internal("PositionTextureColor.vs").readString(),
+      Gdx.files.internal("PositionTextureColor.fs").readString()
+    );
 
-	 	mesh = new Mesh(
-	 		true, rows*columns*7, rows*columns*6,
+	 	mesh = new Mesh(true, rows*columns*7, rows*columns*6,
 	 		new VertexAttribute(Usage.Position, 3, "a_position"),
 	 		new VertexAttribute(Usage.Position, 2, "a_offset"),
 	 		new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"));          
@@ -248,7 +246,7 @@ public class Globe
 		Gdx.gl20.glEnable(GL20.GL_BLEND);
         Gdx.gl20.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
-
+     
         if (dirty)
         {
        		texture = new Texture( pixmap );	
@@ -265,7 +263,7 @@ public class Globe
 		shader.begin();
 		shader.setUniformMatrix(shader.getUniformLocation("viewProjection"), p);
 		//sprite.draw(batch);
-    	mesh.render(shader, GL20.GL_TRIANGLES, 0, rows*columns*6);
+    mesh.render(shader, GL20.GL_TRIANGLES, 0, rows*columns*6);
 		shader.end();
 
 	}
