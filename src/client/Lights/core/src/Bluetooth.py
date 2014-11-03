@@ -1,3 +1,4 @@
+#!/usr/bin/python
 #This script is meant to run on the client (PC)
 #It will read in a JSON objects of arrays output by the Java program
 #and send them over to the bluetooth server (WIP)
@@ -5,6 +6,8 @@
 import bluetooth
 import sys
 import json
+import argparse
+import fileinput
 
 TARGET_NAME = "LED Orb Server"
 
@@ -25,17 +28,21 @@ def bt_send(data, addr, port=1):
 
 def deserialize(fname):
 	"Deserialize JSON"
-	with fname.read() as json_str:
-		return json.loads(json_str)
-
-def serialize(color_list):
-	"Serialize into 3d arrays for MCU"
-	raise NotImplementedError()
-	
+	with open(fname, "r") as fp:
+		with fp.read() as json_str:
+			return json.loads(json_str)
 
 def main():
-	data = deserialize(sys.argv[1])
-	s_data = serialize(data)
+	parser = argparse.ArgumentParser(description="Send data over bluetooth")
+	parser.add_argument('-f', nargs='?', 
+		help='Give it a filename of a JSON formatted text file instead of piping to it.',
+ 		type=str)
+	args = parser.parse_args()
+	if args.f:
+		data = deserialize(args.f)
+	else:
+		#read from stdin, pipe me shit
+		data = fileinput.input()
 	dev_addr = find_dev_addr(TARGET_NAME)
 	bt_send(data, addr, port)
 	
