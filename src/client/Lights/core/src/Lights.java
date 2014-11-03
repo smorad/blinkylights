@@ -26,7 +26,7 @@ public class Lights extends ApplicationAdapter
 	public void create () 
 	{
 
-		globe = new Globe(180, 30, .1f);
+		globe = new Globe(180, 28, .1f);
 
  
 		Gdx.input.setInputProcessor(new InputAdapter() 
@@ -37,7 +37,8 @@ public class Lights extends ApplicationAdapter
 
 		    	if (coord.valid)
 		    	{
-		    		globe.SetColorAt(coord, 255, 255, 255, 255);	
+		    		globe.SetColorAt(coord, 255, 255, 255, 255);
+		    		globe.PrintColors();		
 		    	}
 
 				return true;
@@ -49,7 +50,8 @@ public class Lights extends ApplicationAdapter
 				
 		    	if (coord.valid)
 		    	{
-		    		globe.SetColorAt(coord, 255, 255, 255, 255);	
+		    		globe.SetColorAt(coord, 255, 255, 255, 255);
+		    		globe.PrintColors();	
 		    	}
 				return false;
     		}
@@ -62,6 +64,8 @@ public class Lights extends ApplicationAdapter
 
 
 		});
+
+		globe.PrintColors();
 	}
 
 	@Override

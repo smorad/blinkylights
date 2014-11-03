@@ -15,7 +15,9 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.math.*;
 import java.nio.*;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 public class Globe
 {
@@ -50,13 +52,51 @@ public class Globe
 	Texture texture;
 
 	Pixmap pixmap;
+	byte colors[];
+
+	public void PrintColors()
+	{
+
+		ByteBuffer bytes = pixmap.getPixels();
+
+
+   	try 
+   	{ 
+		Files.write(Paths.get("/Users/Dave/Dropbox/Classes/115/blinkylights/src/client/Lights/core/src/test.txt"), colors);
+    } 
+    catch (IOException e) 
+    { 
+    	System.out.println("Failed to write...");
+	}
+}
+
+	public void SetColor(int r, int g, int b, int a)
+	{
+		for (int i =0; i < rows; i++ ) 
+		{
+			for (int j = 0; j < columns; j++ ) 
+			{
+				SetColorAt(j, i,r, g, b, a);
+			}
+		}
+
+	}
+
 	public void SetColorAt(int column, int row, int r, int g, int b, int a)
 	{
+
+
+		byte bb = pixmap.getPixels().get((row + column * rows)*4+0);
 
 		pixmap.getPixels().put((row + column * rows)*4, (byte)r);
 		pixmap.getPixels().put((row + column * rows)*4+1, (byte)g);
 		pixmap.getPixels().put((row + column * rows)*4+2, (byte)b);
 		pixmap.getPixels().put((row + column * rows)*4+3, (byte)a);
+
+		colors[(row + column * rows)*3 + 0] = (byte)r;
+		colors[(row + column * rows)*3 + 1] = (byte)g;
+		colors[(row + column * rows)*3 + 2] = (byte)b;
+
 		dirty = true;
 	}
 
@@ -70,9 +110,11 @@ public class Globe
 	public Globe(int columns, int rows, float step)
 	{
 
+
 		this.columns = columns;
 		this.rows = rows;
 		this.step = step;
+		colors = new byte[rows * columns*3];;
 
 		shader = new ShaderProgram
 		(
@@ -88,11 +130,15 @@ public class Globe
 
 
 		pixmap = new Pixmap( rows, columns, Format.RGBA8888 );
-		pixmap.setColor( 0, 1, 0, 1.0f);
+		pixmap.setColor( 0, 0, 0, 0);
 		pixmap.fill();
 
+
+		SetColor(0, 0, 0, 0);
 		SetColorAt(0, 15, 255, 255, 255, 255);
-		SetColorAt(1, 15, 255, 255, 255, 255);
+		SetColorAt(0, 14, 255, 0, 0, 255);
+		SetColorAt(0, 13, 0, 255, 0, 255);
+		SetColorAt(0, 12, 0, 0, 255, 255);
 
 
 		texture = new Texture( pixmap );
