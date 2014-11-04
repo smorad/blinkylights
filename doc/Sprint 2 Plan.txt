@@ -1,0 +1,45 @@
+Sprint 2 Plan
+Product Name: Light Orb
+Team Name: Blinky Lights
+Sprint Completion Date: ?
+Revision Number: 0.1
+Revision Date: 11/3/2014
+
+Goal:
+During this sprint, we will create a drawing canvas app and an app that supports scrollable text that will wireless transfer information through a bluetooth module and show up on the orb.
+
+Task Listings:
+(13) As a user I want to wirelessly control the LED orb with the companion application, so that I can display media on the LED orb easily.
+-(4) Research bluetooth module
+-(1) Purchase bluetooth module
+-(6) Test serial communication with bluetooth from companion app and Teensy 3.1 microcontroller
+-(12) Install bluetooth hardware on LED orb and update companion app & LED orb code
+
+(5) As a user I want the companion app to support a drawing canvas, so that I may use it to create media to display on the LED orb.
+-(6) Code graphics and GUI for canvas
+-(6) Polish GUI with selectable colors, brushes, and scroll bars
+
+(8) As a user I want the companion app to display scrollable text on the LED orb, so that the LED orb may be used to display messages.
+-(4) Add text support to companion app and hard code bitmaps for font
+-(6) Write code support sprites and layers on companion app
+-(6) Code scrollable text as a sprite
+
+Team Roles:
+Connie: Team Member
+David: Team Member
+Kevin: Scrum Master
+Reid: Product Owner
+Steven: Team Member
+
+Initial Task Assignment:
+Connie: 2nd user story, task #2
+David: 2nd user story, task #1
+Kevin: 3rd user story, task#3
+Reid: 1st user story, all tasks
+Steven: 3rd user story, task #1, 2
+
+Initial Burnup Chart and Scrum Board:
+Look on Github account
+
+Scrum Times:
+Monday, Wednesday, Friday before class starts. TA will meet with Blinky Lights on Friday.
