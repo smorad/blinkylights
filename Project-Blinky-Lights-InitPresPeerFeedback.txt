@@ -1,0 +1,131 @@
+"Really cool project. Seems like a lot but I know that you already have a working prototype so you can do it!"
+"Project seems a little too ambitious.  The presentation was very clear. Contained all required topics."
+"You had all the content you needed.
+Your presentation made your project ideas clear to me.
+The presentation was delivered well.
+This project seems like it will require a lot of work."
+"Content: Format was correct.
+Clarity: Made sense to me.
+Delivery:  You guys look motivated to work on it.
+Feasible:  Yes! Sounds like fun working with LEDs."
+"Had all necessary content. Delivery sounded disinterested."
+"Seems difficult. Cool idea. Seems really ambitious."
+"Seems like a good idea. Depending on how customizable the app is, it seems more about the hardware. They could do lots of cool stuff and I like the Bluetooth compatability."
+"This is also a hardware engineering project, then. The sample image looks so cool! Feasibility sounds okay, at least on the software part."
+"Spinning LED display thing
+Working with hardware could be difficult, depending on what the starting state looks like. Software side seems doable."
+"Good presentation, looked fine!"
+"LEDs are always fun, good presentation, let's see what they can do."
+"Very cool combo of hardware and software.. maybe too ambitious?"
+"What type of hardware (mainly the sphere) will you use? does metal type have a factor in how a persistent image will take to the sphere?"
+"This is a dope project. I like the idea."
+"This is an actual product that could probably be sold as a toy. An expensive toy."
+"Strong presentation quality. Idea's seem well distilled. Good luck with project."
+"This sounds like quite a task to take on. Hopefully you guys can stay on track and complete it."
+"I've seen the Piazza post on this project. The post gave me a better idea of what the project is about. I think it's feasible but it may require a lot of dedication and work."
+"Only one person presented and it wasn't too clear what it was about."
+"Seemed like they knew what they were doing."
+"they did a good job with their presentation. interested in their topic and did not read from the slides too much."
+"who can't make LED's light up?"
+"They were clear on what the product was, but it was not really stated that their team name and the product name was the same. I thought the team name was blinky lights. They had user stories and the idea seems a little difficult if they do not have previous knowledge of the software."
+"All the presentation requirements were met. 
+
+Very creative idea, good luck!"
+"Super cool fun LED project. The demo you showed on the power point looks amazing.
+
+Making an LED sphere display custom text would be fun.
+
+Presentation was clear and concise."
+"The hardware part of this project seems like it might be difficult. It is a very interesting idea. The team had a good description for their project."
+"I'm glad you guys decided to incorporate hardware. Cant wait to see final product."
+"This project look cool and I am excited for it but I don't know if it is doable in one quarter but you did make the hardware so you have the determination. Good Luck too ambitious"
+"Sounds awesome and a great idea for raves. However, I think they're going to need the help of an EE major. No clue if its doable in the given timeframe. Probably?"
+"Good presentation. I liked that you included a picture of the hardware to help explain what exactly you were doing."
+"Sounds very complicated.  You may want to scale it down a bit.  Good presentation though!"
+"This project is to have a canvas that a user can draw a picture on. The LED sphere will blink and gives out light under the control of the user. They have a very cool idea. This project has some interesting user stories. The speaker is interactive and it seems like a fun project to do. This project is hard but can be doable."
+"Content
+Yes, everything that was required was present.
+Clarity
+Good.
+Delivery
+Could project better.
+Feasibility
+Yes, doable. Not too easy."
+"Cool idea! Images that can be displayed as a LED. Wait to see your guys' finish product."
+"Neat project, good presentation."
+"well made slides, clear presentation, sprint plans make sense. the project seems feasible, overall. might want to add cut some unncessary features."
+"Great slide show, you hit every point."
+"This team was very good, and I liked their presentation very much. They had clear points."
+"Content: Did the presentation address all salient topics?
+Yes.
+Clarity: Could you tell somebody else what the project was about?
+Yes. 
+> persistent image on a sphere, using LED lights
+> scrolling messages on sphere
+> companion app
+This team already has a hardware demo showing that a lot of the groundwork is already set. The project sounds interesting and fun to work on. They aim to show a persistent image on a sphere, with set goals for what they hope to add on - just as words. 
+Delivery: Audible? Intelligible? Engaging?
+Yes. But they should have shown the last image first, since I was doing guesswork in the beginning to interpret what they were talking about.
+Feasible? 
+Yes, it seems like that hard parts are over since they have a hardware demo already."
+"I like the idea of the LED orb. It is pretty cool. Good presenation and the idea is feasible."
+"Best idea ever."
+"Very interesting device you plan on building. Really appreciated the picture that was included in the slide of the revolving disco ball."
+"my team"
+"Presentation looks nice, and the idea is super neat.  Well done overall."
+"Adding hardware to the project seems like it could make things difficult especially if all the code you are doing is for visual representations. Good luck!"
+"I didn't really understand the concept of what they are trying to implement. I understand that it involves drawing and LED orbs, but I didn't really understand how they are connecting these two parts together."
+"Good luck with this project. It seems like there is alot of CE components, but I'm excited to see what you can do."
+"This looks like a fun project. I'm still not sure what exactly it is that you're doing. Is this just a ball of leds and you write a few programs for it to flash differently?"
+"Managed to present all their content. Clear delivery, and project is feasible."
+"my team"
+"Cool idea for a project."
+"Definitely very cool, I want to see it."
+"Solid presnetiation. Just add more detail to the slides."
+"Cool. Concept is conveyed clearly and understandably. No idea how this stuff works so my saying it's feasible is negligible."
+"Yes, the team addressed all of the salient topics. Based on the clarity, I could tell somebody else what the project is about. The delivery was audible, and intelligible. The feasibility of the project is doable and not too easy, and not too ambitious."
+"Seems quite daunting that you all are making the hardware and the software. Hope it doesn't turn out to be too much and it all goes well!"
+"Content (10 - 1) 10 = Awesome, 1 = No Content
+Clarity (10 - 1) 10 = I Understand what you are doing, 1 = huh?
+Delivery(10 - 1) 10 = I can listen to you all day, 1 = Zzzz.
+
+Content: 10 
+Clarity : 10
+Delivery: 10
+Doable: Yes!"
+"Great sounding project. Although, I'm more interested in the hardware than the software of this project. Presented alright, but wished there were more details on how it was going to be built."
+"Presentation could use some work."
+"Content
+Create a LED light sphere to display patterns
+Sprint #1 Finish hardware
+Sprint #2 Software. Pairing 
+Sprint #3 Better graphics support
+
+Clarity
+Some more examples of what you are doing would be nice. How are we going to use your product?
+Delivery
+Delivery was good."
+"It was pretty unclear if they were starting from scratch, or using premade hardware. More expansion on what they will actually be doing to the hardware would have been nice."
+"cool poject idea, but presentation was unclear about how it was going to be achieved"
+"Something that is all about the hardware is surprising in a software engineering class, but none the less looks interesting."
+"Members: Present
+Summary: Present
+Goals: Present
+Stories: Present
+Clarity: Good
+Delivery: Good
+Feasibility: Good"
+"Very interesting idea. Merges engineering with computer science. Should make for a very interesting project."
+"Not enough info on what the product was about."
+"Very cool project! The presentation was solid, looking forward to seeing what you guys do!"
+"Introduced
+A bit quiet
+Concise description
+Scope seems slightly ambitious"
+"A ball of LEDs?"
+"Seems kind of ambitious but would be really cool if finished."
+"BLINKY LIGHTS"
+"instant lightshows are cool"
+"Great, covered everything that was required of the presentation."
+"#NAME?"
+"Interesting presentation, would like to see some nice canvases."
