@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 ci:
-	git add src/ doc/ bin/ Makefile 
+	git add `find src/ doc/ bin/ | "s/\(.*\)/"\1"/"` Makefile 
 	git commit
 	git push https://github.com/smorad/blinkylights master
 

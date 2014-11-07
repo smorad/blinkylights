@@ -36,6 +36,24 @@ CRGB leds[NUM_LEDS];
 CRGB img[N_PIXELS][NUM_LEDS];
 volatile int pixel;
 
+// bluetooth
+int bttx = 2;
+int btrx = 3;
+SoftwareSerial bluetooth(bttx, btrx);
+
+//puts the bluetooth in cmd mode to change settings
+void init_bt() {
+	Serial.begin(9600);
+	bluetooth.begin(115200);
+	for(i=0; i<3; i++)
+		bluetooth.print("$");
+	delay(100);
+	bluetooth.println("U,9600,N"); //set bt baud rate, no parity
+	bluetooth.begin(9600);
+}
+
+
+
 // setup test RGB stripes
 void init_leds() {
   for (int i = 0; i < N_PIXELS; i++) {
@@ -137,7 +155,17 @@ void loop() {
     
     refreshInterval = (times.sum() / times.count()) / N_PIXELS;
   }
-  
+
+	//check bt buffer for data, move it to our arrays
+	//no need to update LEDs, should sync upon sensor flag
+	if(bluetooth.available()){
+		for(i=0; i<sizeof(img); i++){
+			img[i] = serial.read();
+		}
+		//if buffer isn't empty, we fucked up
+		//lets empty it and await the next transfer
+		while(serial.read());
+	}  
 }
 
 
