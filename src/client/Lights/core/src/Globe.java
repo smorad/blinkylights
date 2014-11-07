@@ -24,9 +24,16 @@ public class Globe
 
 	private class VertexData
 	{
-		public float x,y,z;
-		public float ox, oy;
-		public float tx, ty;
+		public VertexData(Vector3 position, Vector2 texture, Vector2 offset)
+		{
+			this.offset = offset;
+			this.position = position;
+			this.texture = texture;
+		}
+
+		public Vector3 position;
+		public Vector2 texture;
+		public Vector2 offset;
 	}
 
 	public class Coord
@@ -43,11 +50,12 @@ public class Globe
 
 
 	private Mesh mesh;
-  private ShaderProgram shader;
+  	private ShaderProgram shader;
 	private int columns;
 	private int rows;
 	private float rotation = 90;
 	private boolean dirty = true;
+
 	float step;
 	Texture texture;
 
@@ -118,14 +126,16 @@ public class Globe
 
 		shader = new ShaderProgram
 		(
-      Gdx.files.internal("PositionTextureColor.vs").readString(),
-      Gdx.files.internal("PositionTextureColor.fs").readString()
-    );
+      		Gdx.files.internal("PositionTextureColor.vs").readString(),
+      		Gdx.files.internal("PositionTextureColor.fs").readString()
+      	);
 
-	 	mesh = new Mesh(true, rows*columns*7, rows*columns*6,
+
+ 		int components = 7; //position 3 + texture 2 + offset 2 (for smooth shading)
+	 	mesh = new Mesh(true, rows*columns*components, rows*columns*6,
 	 		new VertexAttribute(Usage.Position, 3, "a_position"),
-	 		new VertexAttribute(Usage.Position, 2, "a_offset"),
-	 		new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"));          
+	 		new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"),
+	 		new VertexAttribute(Usage.Position, 2, "a_offset"));       
  
 
 
@@ -134,69 +144,53 @@ public class Globe
 		pixmap.fill();
 
 
-		SetColor(0, 0, 0, 0);
+		SetColor(255, 255, 255, 255);
 		SetColorAt(0, 15, 255, 255, 255, 255);
 		SetColorAt(0, 14, 255, 0, 0, 255);
 		SetColorAt(0, 13, 0, 255, 0, 255);
-		SetColorAt(0, 12, 0, 0, 255, 255);
+		SetColorAt(0, 11, 0, 0, 255, 255);
 
 
 		texture = new Texture( pixmap );
 
 
+
+		//Generate the vertex data for a sphere
 	 	VertexData verts[][][] = new VertexData[rows][columns][4];
-
-
 	 	for (int r = 0; r < rows; r++)
+	 	{
+	 		for (int c = 0; c < columns; c++)
+	 		{
 
- 		for (int i = 0; i < columns; i++)
- 		{
+				float angle1 = c/(float)columns*3.1416f*2.0f;
+				float angle2 = (c+1)/(float)columns*3.1416f*2.0f;
 
-			float radius = (float)Math.cos(((float)r/rows - .5f)*2.0);
+				//Find the radius of this band using x^2 + y^2 = r^2 r = 1 since its a unit circle.
+				float radius1 =  (float)Math.sqrt(1.0f - 4 * ((r)/(float)rows-.5f) * ((r)/(float)rows-.5f));
+				float radius2 =  (float)Math.sqrt(1.0f - 4 * ((r+1)/(float)rows -.5f) * ((r+1)/(float)rows-.5f));
 
- 			for (int j = 0; j < 4; j++)
- 			{
 
-	 			VertexData v = new VertexData(); 
-				v.x = (float)Math.cos(i/(double)columns * Math.PI * 2.0) * radius;
-				v.z = (float)Math.sin(i/(double)columns * Math.PI * 2.0) * radius;
-				v.y = (r/30.0f*1.5f) - .75f;
-				v.tx = (float)r/(float)rows + .5f/rows;
-				v.ty = (float)i/(float)columns + .5f/columns;
+				Vector3 p1 = new Vector3(radius1*(float)Math.cos(angle1), r/(float)rows*2, radius1*(float)Math.sin(angle1));
+				Vector3 p2 = new Vector3(radius1*(float)Math.cos(angle2), r/(float)rows*2, radius1*(float)Math.sin(angle2));
 
-				float offset = .01f;
-				if (j % 4 == 0)
-			 	{
-			 		v.ox = -offset;
-	 				v.oy = -offset;
-			 	}
-			 	else if (j % 4 == 1)
-			 	{
-			 		v.ox= -offset;
-	 				v.oy = offset;
-			 	}
-			 	else if (j % 4 == 2)
-			 	{
+				Vector3 p3 = new Vector3(radius2*(float)Math.cos(angle1), (r+1)/(float)rows*2, radius2*(float)Math.sin(angle1));
+				Vector3 p4 = new Vector3(radius2*(float)Math.cos(angle2), (r+1)/(float)rows*2, radius2*(float)Math.sin(angle2));
 
-			 		v.ox = offset;
-	 				v.oy = -offset;
-			 	}
-			 	else
-			 	{
-					v.ox = offset;
-	 				v.oy = offset;
-	 			}
+				Vector2 textureCoord = new Vector2((float)r/(float)rows + .5f/rows, (float)c/(float)columns + .5f/columns);
 
-	 			verts[r][i][j] = v;
- 			}
- 		}
+	
+				verts[r][c][0] = new VertexData(p1, textureCoord, new Vector2(-1, -1));
+				verts[r][c][1] = new VertexData(p2, textureCoord, new Vector2(-1, 1));
+				verts[r][c][2] = new VertexData(p3, textureCoord, new Vector2(1, -1));
+				verts[r][c][3] = new VertexData(p4, textureCoord, new Vector2(1, 1));
+	 		}
+	 	}
 
+	 	//6 indeicies for 2 triangles to draw 1 quad.
  		short indicies[] = new short[columns*6*rows];
-
  		int j = 0;
 		for (short i = 0; i < columns*6*rows; i+= 6, j++)
  		{
-
  			indicies[i+0] = (short)(j*4+0);
  			indicies[i+1] = (short)(j*4+1);
  			indicies[i+2] = (short)(j*4+2);
@@ -204,31 +198,27 @@ public class Globe
  			indicies[i+3] = (short)(j*4+1);
  			indicies[i+4] = (short)(j*4+2);
  			indicies[i+5] = (short)(j*4+3);
-
  		}
 
-
-
- 		int e = 7;
- 		float t[] = new float[rows*columns*e*4];
-
+ 		//Flatten the data into a single block to upload... fuck java's type system
+ 		float t[] = new float[rows*columns*components*4];
  		for (int r = 0; r < rows; r++) 
  		for (int i = 0; i < columns; i++) 
  		{
  			for (int k = 0; k < 4; k++)
  			{ 
- 				t[r*columns*4*e + i*4*e + k*e + 0] = verts[r][i][k].x;
- 				t[r*columns*4*e + i*4*e + k*e + 1] = verts[r][i][k].y;
- 				t[r*columns*4*e + i*4*e + k*e + 2] = verts[r][i][k].z;
- 				t[r*columns*4*e + i*4*e + k*e + 3] = verts[r][i][k].ox;
- 				t[r*columns*4*e + i*4*e + k*e + 4] = verts[r][i][k].oy;
- 				t[r*columns*4*e + i*4*e + k*e + 5] = verts[r][i][k].tx;
- 				t[r*columns*4*e + i*4*e + k*e + 6] = verts[r][i][k].ty;
+ 				t[r*columns*4*components + i*4*components + k*components + 0] = verts[r][i][k].position.x;
+ 				t[r*columns*4*components + i*4*components + k*components + 1] = verts[r][i][k].position.y;
+ 				t[r*columns*4*components + i*4*components + k*components + 2] = verts[r][i][k].position.z;
 
+ 				t[r*columns*4*components + i*4*components + k*components + 3] = verts[r][i][k].texture.x;
+ 				t[r*columns*4*components + i*4*components + k*components + 4] = verts[r][i][k].texture.y;
+
+ 				t[r*columns*4*components + i*4*components + k*components + 5] = verts[r][i][k].offset.x;
+ 				t[r*columns*4*components + i*4*components + k*components + 6] = verts[r][i][k].offset.y;
  			}
  		}
-
-      	mesh.setVertices(t);     //top
+      	mesh.setVertices(t);
       	mesh.setIndices(indicies);   
 
 	}
@@ -236,7 +226,7 @@ public class Globe
 	public Coord GetCoord(int screenX, int screenY)
 	{
 
-		Matrix4 mm = new Matrix4().translate(new Vector3(0, 0, 1.f)).rotate(0, 1,0, 0).scale(.85f, .85f,.85f);
+		Matrix4 mm = new Matrix4().translate(new Vector3(0, -1.f*.85f, 1.f)).rotate(0, 1,0, 0).scale(.85f, .85f,.85f);
 
 				// Matrix4 p = (new Matrix4().setToProjection(.0001f, 1, 90, 1)).mul(mm);
 	   	Matrix4 p = new Matrix4().mul(mm);
@@ -255,23 +245,21 @@ public class Globe
 		if (depth != 1.0)
 		{
 
-			Vector3 v = new Vector3(x,y,depth);
+			Vector3 v = new Vector3(x,y,0);
 			v= v.prj(p.inv());
-			
-			float radius = (float)Math.cos(v.y*3.1415f/2.0f);
 
-			///System.out.format("%f\n", radius);
-			//System.out.format("%f %f %f\n", v.x/radius, v.y, v.z*2.0/radius);
 
-			v = new Vector3(v.x/radius, v.y, v.z*2.0f/radius);
+			float radius = (float)Math.sqrt(1.0 - (v.y - 1.0)*(v.y - 1.0));
 
-			float angle = -(float)Math.atan2(v.z, v.x)* 180/3.145f;
-			//System.out.format("%f\n", angle );
 
-			int column = Math.abs(((360 -(int)angle+(int)rotation)/2))% columns;
+			float angle = (float)Math.acos(v.x/radius);
+			System.out.format("%f\n", angle/3.1415*180);
 
-			int row = (int)(-v.y/step*2.0 + 15);
+			int column = (int)((360 - angle/3.1415*180 + rotation)/2.0) % columns;
 
+			int row = (int)(v.y*rows)/2;
+			row = row >= 28 ? 27 : row;
+			row = rows - 1  - row;
 
 			System.out.format("%d  %d\n", column, row);
 			return new Coord(column, row, true);
@@ -285,7 +273,7 @@ public class Globe
 	{
 
 		rotation += .1;
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(.25f, .25f, .25f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
 
@@ -299,7 +287,7 @@ public class Globe
        		dirty = false;
         }
 
-		Matrix4 v = new Matrix4().translate(new Vector3(0, 0, 1.f)).rotate(0, 1,0, rotation).scale(.85f, .85f,.85f);
+		Matrix4 v = new Matrix4().translate(new Vector3(0, -1.f*.85f, 1.f)).rotate(0, 1,0, rotation).scale(.85f, .85f,.85f);
 
         //Matrix4 p = (new Matrix4().setToProjection(.0001f, 5, 90, 1)).mul(v);
         Matrix4 p = new Matrix4().mul(v);
@@ -309,7 +297,7 @@ public class Globe
 		shader.begin();
 		shader.setUniformMatrix(shader.getUniformLocation("viewProjection"), p);
 		//sprite.draw(batch);
-    mesh.render(shader, GL20.GL_TRIANGLES, 0, rows*columns*6);
+    	mesh.render(shader, GL20.GL_TRIANGLES, 0, rows*columns*6);
 		shader.end();
 
 	}

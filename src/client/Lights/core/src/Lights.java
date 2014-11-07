@@ -37,7 +37,7 @@ public class Lights extends ApplicationAdapter
 
 		    	if (coord.valid)
 		    	{
-		    		globe.SetColorAt(coord, 255, 255, 255, 255);
+		    		globe.SetColorAt(coord, 255, 0, 0, 255);
 		    		globe.PrintColors();		
 		    	}
 
@@ -50,7 +50,7 @@ public class Lights extends ApplicationAdapter
 				
 		    	if (coord.valid)
 		    	{
-		    		globe.SetColorAt(coord, 255, 255, 255, 255);
+		    		globe.SetColorAt(coord, 255, 0, 0, 255);
 		    		globe.PrintColors();	
 		    	}
 				return false;
