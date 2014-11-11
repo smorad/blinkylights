@@ -59,6 +59,22 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     }
   }
   
+  public class rotate_button extends Actor_button {
+    double rotate_speed;
+    public rotate_button(double r_speed, int index){
+      initialize_actor_button(index); //initialize the button on parent class level.
+      rotate_speed = r_speed;
+    } 
+    
+    @Override
+    public void act(float delta){
+      if(started){ 
+        globe.add_speed(rotate_speed);
+        started = false;
+      }
+    }
+  }
+  
   @Override
   public void create () 
   {
@@ -67,26 +83,34 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     globe = new Globe(180, 28, .1f);
     ui = new Stage();
     
-    color_button red = new color_button(255, 0, 0, 255, 1); //red color_button
-    red.set_position(30, (int)(Gdx.graphics.getHeight()*.9) );
+    color_button button_red = new color_button(255, 0, 0, 255, 1); //red color_button
+    button_red.set_position(30, (int)(Gdx.graphics.getHeight()*.9) );
     
-    color_button green = new color_button(0, 255, 0, 255, 2); //green color_button
-    green.set_position(30, (int)(Gdx.graphics.getHeight()*.8));
+    color_button button_green = new color_button(0, 255, 0, 255, 2); //green color_button
+    button_green.set_position(30, (int)(Gdx.graphics.getHeight()*.8));
     
-    color_button blue = new color_button(0, 0, 255, 255, 3); //blue color_button
-    blue.set_position(30, (int)(Gdx.graphics.getHeight()*.7));
+    color_button button_blue = new color_button(0, 0, 255, 255, 3); //blue color_button
+    button_blue.set_position(30, (int)(Gdx.graphics.getHeight()*.7));
+    
+    rotate_button button_left_rotate = new rotate_button(.1, 4);
+    button_left_rotate.set_position((int)(Gdx.graphics.getWidth()*.1), 30);
+    
+    rotate_button button_right_rotate = new rotate_button(-.1, 5);
+    button_right_rotate.set_position((int)(Gdx.graphics.getWidth()*.2), 30);
     
     //I believe this code is for touch screen capabilities on android platforms. not sure.
     /*
-    red.setTouchable(Touchable.enabled); 
-    green.setTouchable(Touchable.enabled);
-    blue.setTouchable(Touchable.enabled);
+    button_red.setTouchable(Touchable.enabled); 
+    button_green.setTouchable(Touchable.enabled);
+    button_blue.setTouchable(Touchable.enabled);
     */
 
     //add the buttons to the stage.
-    ui.addActor(red);
-    ui.addActor(blue);
-    ui.addActor(green);
+    ui.addActor(button_red);
+    ui.addActor(button_green);
+    ui.addActor(button_blue);
+    ui.addActor(button_left_rotate);
+    ui.addActor(button_right_rotate);
     
     im.addProcessor(ui);
     im.addProcessor(new InputAdapter() {
@@ -94,7 +118,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
         Globe.Coord coord = globe.GetCoord(screenX, screenY);
         if (coord.valid) {
           globe.SetColorAt(coord, r, g, b, a); //sets color on initial click
-          globe.PrintColors();		
+          globe.PrintColors();
         }
         return true;
       }

@@ -29,6 +29,11 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 public class Globe
 {
+  double speed = .1;
+  
+  public void add_speed(double intput_speed) { speed += intput_speed; }
+
+
 
   private class VertexData
   {
@@ -283,7 +288,7 @@ public class Globe
   public void render() 
   {
 
-    rotation += .1; //speed at which the globe turns.
+    rotation += speed; //speed at which the globe turns.
     Gdx.gl.glClearColor(.25f, .25f, .25f, 1); //grey background.
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
     Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
