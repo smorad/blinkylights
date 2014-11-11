@@ -30,8 +30,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 public class Globe
 {
 
-
-
   private class VertexData
   {
     public VertexData(Vector3 position, Vector2 texture, Vector2 offset)
@@ -90,7 +88,7 @@ public class Globe
     }
   }
 
-  //set all the LEDs on the app
+  //set all the LEDs on the screen
   public void SetColor(int r, int g, int b, int a)
   {
     for (int i =0; i < rows; i++ ) 
@@ -123,6 +121,7 @@ public class Globe
   //manual color setting function on the globe.
   public void SetColorAt(Coord coord, int r, int g, int b, int a)
   {
+
     SetColorAt(coord.column, coord.row, r, g, b, a);
   }
 
@@ -157,7 +156,7 @@ public class Globe
     pixmap.fill(); //fills pixmap to all black. (should turn off all LED on actual globe.)
 
 
-    SetColor(255, 255, 255, 255); //sets all LED globe in app to white.
+    SetColor(255, 255, 255, 255); //sets all LED globe on screen to white.
     SetColorAt(0, 15, 255, 255, 255, 255);
     SetColorAt(0, 14, 255, 0, 0, 255);
     SetColorAt(0, 13, 0, 255, 0, 255);
