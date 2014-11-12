@@ -1,0 +1,33 @@
+Sprint #2 Report
+Light Orb
+Blinky Lights
+11/12/2014
+
+What things should we stop doing?
+We should stop being late to some scrum meetings before class.
+
+What things should we start doing?
+- Make documents more accessible (SCRUM Board, Burnup Chart, Sprint Plan, etc.)
+- We will start documenting early and often
+- We need to establish regular team working hours in the Lab
+
+What is working well that we should continue to do?
+- Holding SCRUM meetings regularly, 3 times a week.
+- Communicating every day on the facebook group forum.
+- Sharing ideas that come up while we are working that will benefit the release of the product.
+- Updating SCRUM Board and Burnup Chart in a timely manner, so that progress is more visible to all the team members while the sprint progresses.
+
+Work completed:
+- As a user I want the companion app to support a drawing canvas, so that I may use it to create media to display on the LED orb.
+
+
+Work not completed:
+- As a user I want the companion app to support a drawing canvas, so that I may use it to create media to display on the LED orb.
+- As a user I want the companion app to display scrollable text on the LED orb, so that the LED orb may be used to display messages.
+
+(CHANGE EVERYTHING BELOW)
+Work completion rate:
+- total number of user stories completed during sprint: first user story at least 50% done. Second user story completely done.
+- total number of estimated ideal work hours completed during the prior sprint: 25 hours
+- total number of days during the prior sprint: 14 days
+- Two user stories within 14 days. We had 29 possibly story points to complete. We spent 25 hours during the first sprint. Actual rates of work is 2.07. Our ideal work hours/day is approximately 1.79 hours per day.
