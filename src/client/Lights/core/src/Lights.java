@@ -26,6 +26,11 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 
 public class Lights extends ApplicationAdapter implements ApplicationListener
 {
@@ -60,8 +65,8 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
   }
   
   public class rotate_button extends Actor_button {
-    double rotate_speed;
-    public rotate_button(double r_speed, int index){
+    float rotate_speed;
+    public rotate_button(float r_speed, int index){
       initialize_actor_button(index); //initialize the button on parent class level.
       rotate_speed = r_speed;
     } 
@@ -78,6 +83,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
   @Override
   public void create () 
   {
+     Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
     InputMultiplexer im = new InputMultiplexer(); //allows for multiple event handling.
     
     globe = new Globe(180, 28, .1f);
@@ -92,11 +98,45 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     color_button button_blue = new color_button(0, 0, 255, 255, 3); //blue color_button
     button_blue.set_position(30, (int)(Gdx.graphics.getHeight()*.7));
     
+    TextButton button_left_rotate = new TextButton("<",skin);
+    button_left_rotate.setBounds((int)(Gdx.graphics.getWidth()*.1), 0, 30, 30);
+    
+    button_left_rotate.addListener(new ClickListener(){
+      //@Override 
+      public void clicked(InputEvent event, float x, float y){ globe.add_speed((float).1); }
+    });
+    
+    TextButton button_right_rotate = new TextButton(">",skin);
+    button_right_rotate.setBounds((int)(Gdx.graphics.getWidth()*.1+30), 0, 30, 30);
+    button_right_rotate.addListener(new ClickListener(){
+      @Override 
+      public void clicked(InputEvent event, float x, float y){ globe.add_speed((float)-.1); }
+    });
+    /*
     rotate_button button_left_rotate = new rotate_button(.1, 4);
     button_left_rotate.set_position((int)(Gdx.graphics.getWidth()*.1), 30);
     
     rotate_button button_right_rotate = new rotate_button(-.1, 5);
-    button_right_rotate.set_position((int)(Gdx.graphics.getWidth()*.2), 30);
+    button_right_rotate.set_position((int)(Gdx.graphics.getWidth()*.15), 30);
+    */
+    
+    TextArea textMessage = new TextArea("",skin);
+    textMessage.setBounds(200, 0, 200, 30); //x_position, y_position, width, height)
+    
+    TextButton button_display_text = new TextButton("Display",skin);
+    button_display_text.setBounds(420, 0, 80, 30);
+    
+    button_display_text.addListener(new ClickListener(){
+      @Override 
+      public void clicked(InputEvent event, float x, float y){    
+        // When the button_display_text is clicked, get the message text or create a default string value
+        /*
+        if(textMessage.getText().length() > 0) {
+          globe.display_text(textMessage.getText());   // + ("\n"); // Brute for a newline so readline gets a line
+        }
+        */
+      }
+    });
     
     //I believe this code is for touch screen capabilities on android platforms. not sure.
     /*
@@ -111,6 +151,8 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     ui.addActor(button_blue);
     ui.addActor(button_left_rotate);
     ui.addActor(button_right_rotate);
+    ui.addActor(textMessage);
+    ui.addActor(button_display_text);
     
     im.addProcessor(ui);
     im.addProcessor(new InputAdapter() {

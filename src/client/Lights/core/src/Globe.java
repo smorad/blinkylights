@@ -29,11 +29,18 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 public class Globe
 {
-  double speed = .1;
+  float speed = (float).1;
+  //public void add_speed(double intput_speed) { speed += intput_speed; }
   
-  public void add_speed(double intput_speed) { speed += intput_speed; }
-
-
+  public void display_text(String text) {
+  
+  }
+  
+  public void add_speed(float rotation)
+  {
+      this.speed = (((rotation % 360) + 360) % 360);
+  }
+  
 
   private class VertexData
   {
@@ -126,7 +133,6 @@ public class Globe
   //manual color setting function on the globe.
   public void SetColorAt(Coord coord, int r, int g, int b, int a)
   {
-
     SetColorAt(coord.column, coord.row, r, g, b, a);
   }
 
@@ -275,6 +281,10 @@ public class Globe
       int row = (int)(v.y*rows)/2;
       row = row >= 28 ? 27 : row;
       row = rows - 1  - row;
+      
+      
+      //Suppressing the OutOfBoundsIndex bug by setting any negative values to 0
+      if (column < 0 || row < 0) { return new Coord(-1, -1, false); }
 
       System.out.format("%d  %d\n", column, row);
       return new Coord(column, row, true);
@@ -317,6 +327,8 @@ public class Globe
     shader.end();
 
   }
+  
+  
 
 
 }
