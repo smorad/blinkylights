@@ -21,13 +21,15 @@ Work completed:
 - As a user I want the companion app to support a drawing canvas, so that I may use it to create media to display on the LED orb.
 
 
-Work not completed:
-- As a user I want the companion app to support a drawing canvas, so that I may use it to create media to display on the LED orb.
-- As a user I want the companion app to display scrollable text on the LED orb, so that the LED orb may be used to display messages.
 
-(CHANGE EVERYTHING BELOW)
+Work not completed:
+- As a user I want the companion app to display scrollable text on the LED orb, so that the LED orb may be used to display messages.
+- As a user I want to wirelessly control the LED orb with the companion application, so that I can display media on the LED orb easily.
+
+
 Work completion rate:
-- total number of user stories completed during sprint: first user story at least 50% done. Second user story completely done.
-- total number of estimated ideal work hours completed during the prior sprint: 25 hours
+- total number of user stories completed during sprint: First and Second user story not done. We ran into unforeseen problems with bluetooth and is requiring more 
+    time/research to resolve than anticipated. Third user story is finished.
+- total number of estimated ideal work hours completed during the prior sprint: 43 hours
 - total number of days during the prior sprint: 14 days
-- Two user stories within 14 days. We had 29 possibly story points to complete. We spent 25 hours during the first sprint. Actual rates of work is 2.07. Our ideal work hours/day is approximately 1.79 hours per day.
+- 1 user story within 14 days. We had 26 possibly story points to complete. We spent 43 hours during the second sprint. Actual rates of work is 3.07. Our ideal work hours/day is approximately 3.64 hours per day.
