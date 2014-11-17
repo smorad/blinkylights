@@ -1,0 +1,11 @@
+To test, we will do the following:
+
+	Blackbox testing:
+		Try and draw different objects
+		Draw and erase and redraw, looking for visual artifacts
+
+	Whitebox testing:
+		See if it's possible to overflow the bluetooth buffer with a normal use case
+		See if it's possible for bad data to enter the bluetooth buffer
+
+

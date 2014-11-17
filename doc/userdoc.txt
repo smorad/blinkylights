@@ -1,0 +1,5 @@
+To run without the jar:
+	cd to the /src/Lights/ directory and run 'gradlew' to download OpenGL bindings
+	next, from the src/lights directory run 'gradlew run'
+
+	

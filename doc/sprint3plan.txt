@@ -1,0 +1,39 @@
+Sprint 3 Plan
+Product Name: Light Orb
+Team Name: Blinky Lights
+Sprint Completion Date: ?
+Revision Number: 0.2
+Revision Date: 11/14/2014
+
+Goal:
+During this sprint, we will ensure that the client and orb work well together. We will also put on the finishing touches.
+
+Task Listings:
+(12) As a developer, I want to ensure that the orb can successfully talk with the client
+-(8) As a developer I want to ensure that the bluetooth link is stable
+-(4) As a developer I want to ensure that the bluetooth data buffer on the arduino is performing as expected
+
+(21) As a user, I want the experience to be polished
+-(15) As a user, I want to be able to display text on the orb
+-(6) As a user, I want to be able to draw layers and have them rasterize on the orb
+-(3) As a developer, I want to think of new creative ideas to enhance the experience
+
+Team Roles:
+Connie: Team Member
+David: Scrum Master
+Kevin: Team Member
+Reid: Product Owner
+Steven: Scrum Master
+
+Initial Task Assignment:
+Connie: 2nd user story, task #3
+David: 2nd user story, task #1
+Kevin: 3rd user story, task#2
+Reid: 1st user story, task #2
+Steven: 1sd user story, task #1
+
+Initial Burnup Chart and Scrum Board:
+Look on Github account
+
+Scrum Times:
+Monday, Wednesday, Friday before class starts. TA will meet with Blinky Lights on Friday.
