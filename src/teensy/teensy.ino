@@ -1,5 +1,6 @@
 #include <FastLED.h>
 #include <QueueList.h>
+#include "image.h"
 
 #define NUM_LEDS    28       // number of RGB LEDs or vertical pixels
 #define TYPE        LPD8806  // LED driver model
@@ -33,24 +34,15 @@ IntervalTimer refreshTimer; // led refresh timer interrupt
 
 // led strip
 CRGB leds[NUM_LEDS];
-CRGB img[N_PIXELS][NUM_LEDS];
+//CRGB img[N_PIXELS][NUM_LEDS];
 volatile int pixel;
 
 // bluetooth
 int bttx = 2;
 int btrx = 3;
-SoftwareSerial bluetooth(bttx, btrx);
 
-//puts the bluetooth in cmd mode to change settings
-void init_bt() {
-	Serial.begin(9600);
-	bluetooth.begin(115200);
-	for(i=0; i<3; i++)
-		bluetooth.print("$");
-	delay(100);
-	bluetooth.println("U,9600,N"); //set bt baud rate, no parity
-	bluetooth.begin(9600);
-}
+
+
 
 
 
@@ -117,7 +109,7 @@ void setup() {
   FastLED.setCorrection(0xFFFFFF);
   FastLED.setTemperature(0xFFFFFF);
   
-  init_leds();
+  //init_leds();
   
   sensor_flag = 0;
   rotationTime = 0;

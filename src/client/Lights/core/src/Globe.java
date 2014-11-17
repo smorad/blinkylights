@@ -92,7 +92,7 @@ public class Globe
 
     try 
     { 
-      Files.write(Paths.get("/Users/Dave/Dropbox/Classes/115/blinkylights/src/client/Lights/core/src/test.txt"), colors);
+      Files.write(Paths.get("/Users/Reid/Desktop/test.txt"), colors);
     } 
     catch (IOException e) 
     { 
