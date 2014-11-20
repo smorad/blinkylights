@@ -37,6 +37,9 @@ public class Actor_button extends Actor {
     if (index == 1) { texture = new Texture(Gdx.files.internal("red.png")); }
     if (index == 2) { texture = new Texture(Gdx.files.internal("green.png")); }
     if (index == 3) { texture = new Texture(Gdx.files.internal("blue.png")); }
+	if (index == 4) { texture = new Texture(Gdx.files.internal("orange.png")); }
+	if (index == 5) { texture = new Texture(Gdx.files.internal("yellow.png")); }
+	if (index == 6) { texture = new Texture(Gdx.files.internal("purple.png")); }
     
     setBounds(x_position, y_position, texture.getWidth(), texture.getHeight());
     addListener(new InputListener(){

@@ -97,6 +97,15 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     
     color_button button_blue = new color_button(0, 0, 255, 255, 3); //blue color_button
     button_blue.set_position(30, (int)(Gdx.graphics.getHeight()*.7));
+	
+    color_button button_orange = new color_button(255, 135, 0, 255, 4); //orange color_button
+    button_orange.set_position(30, (int)(Gdx.graphics.getHeight()*.6));
+	
+    color_button button_yellow = new color_button(255, 255, 0, 255, 5); //yellow color_button
+    button_yellow.set_position(30, (int)(Gdx.graphics.getHeight()*.5));
+	
+    color_button button_purple = new color_button(185, 85, 210, 255, 6); //purple color_button
+    button_purple.set_position(30, (int)(Gdx.graphics.getHeight()*.4));
     
     TextButton button_left_rotate = new TextButton("<",skin);
     button_left_rotate.setBounds((int)(Gdx.graphics.getWidth()*.1), 0, 30, 30);
@@ -149,6 +158,9 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     ui.addActor(button_red);
     ui.addActor(button_green);
     ui.addActor(button_blue);
+	ui.addActor(button_orange);
+	ui.addActor(button_yellow);
+	ui.addActor(button_purple);
     ui.addActor(button_left_rotate);
     ui.addActor(button_right_rotate);
     ui.addActor(textMessage);
