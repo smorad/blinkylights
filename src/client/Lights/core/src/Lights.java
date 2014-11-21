@@ -64,76 +64,61 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     }
   }
   
-  public class rotate_button extends Actor_button {
-    float rotate_speed;
-    public rotate_button(float r_speed, int index){
-      initialize_actor_button(index); //initialize the button on parent class level.
-      rotate_speed = r_speed;
-    } 
-    
-    @Override
-    public void act(float delta){
-      if(started){ 
-        globe.add_speed(rotate_speed);
-        started = false;
-      }
-    }
-  }
-  
   @Override
   public void create () 
   {
-     Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-    InputMultiplexer im = new InputMultiplexer(); //allows for multiple event handling.
+    int rotate_pos = (int)(Gdx.graphics.getWidth()*.1);
+    int color_pos =  (int)(Gdx.graphics.getHeight());
     
+    Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+    InputMultiplexer im = new InputMultiplexer(); //allows for multiple event handling.
     globe = new Globe(180, 28, .1f);
     ui = new Stage();
     
+    //button declarations
     color_button button_red = new color_button(255, 0, 0, 255, 1); //red color_button
-    button_red.set_position(30, (int)(Gdx.graphics.getHeight()*.9) );
-    
     color_button button_green = new color_button(0, 255, 0, 255, 2); //green color_button
-    button_green.set_position(30, (int)(Gdx.graphics.getHeight()*.8));
-    
     color_button button_blue = new color_button(0, 0, 255, 255, 3); //blue color_button
-    button_blue.set_position(30, (int)(Gdx.graphics.getHeight()*.7));
-	
     color_button button_orange = new color_button(255, 135, 0, 255, 4); //orange color_button
-    button_orange.set_position(30, (int)(Gdx.graphics.getHeight()*.6));
-	
     color_button button_yellow = new color_button(255, 255, 0, 255, 5); //yellow color_button
-    button_yellow.set_position(30, (int)(Gdx.graphics.getHeight()*.5));
-	
     color_button button_purple = new color_button(185, 85, 210, 255, 6); //purple color_button
-    button_purple.set_position(30, (int)(Gdx.graphics.getHeight()*.4));
     
     TextButton button_left_rotate = new TextButton("<",skin);
-    button_left_rotate.setBounds((int)(Gdx.graphics.getWidth()*.1), 0, 30, 30);
+    TextButton button_stop = new TextButton("X",skin);
+    TextButton button_right_rotate = new TextButton(">",skin);
+    TextArea textMessage = new TextArea("",skin);
+    TextButton button_display_text = new TextButton("Display",skin);
+    TextButton button_upload = new TextButton("Upload",skin);
     
+    
+    //button positioninng
+    button_red.set_position(30, (int)(color_pos*.9)); //x_position, y_position
+    button_green.set_position(30, (int)(color_pos*.8));
+    button_blue.set_position(30, (int)(color_pos*.7));
+    button_orange.set_position(30, (int)(color_pos*.6));
+    button_yellow.set_position(30, (int)(color_pos*.5));
+    button_purple.set_position(30, (int)(color_pos*.4));
+    
+    button_left_rotate.setBounds(rotate_pos-30, 0, 30, 30); //x_position, y_position, width, height)
+    button_stop.setBounds(rotate_pos, 0, 30, 30);
+    button_right_rotate.setBounds((int)(rotate_pos+30), 0, 30, 30);
+    textMessage.setBounds(200, 0, 200, 30); 
+    button_display_text.setBounds(420, 0, 80, 30);
+    button_upload.setBounds((int)(Gdx.graphics.getWidth()-80), 0, 80, 30);
+    
+    
+    //button functionality
     button_left_rotate.addListener(new ClickListener(){
-      //@Override 
       public void clicked(InputEvent event, float x, float y){ globe.add_speed((float).1); }
     });
     
-    TextButton button_right_rotate = new TextButton(">",skin);
-    button_right_rotate.setBounds((int)(Gdx.graphics.getWidth()*.1+30), 0, 30, 30);
+    button_stop.addListener(new ClickListener(){ 
+      public void clicked(InputEvent event, float x, float y){ globe.add_speed((float)0); }
+    });
+    
     button_right_rotate.addListener(new ClickListener(){
-      @Override 
       public void clicked(InputEvent event, float x, float y){ globe.add_speed((float)-.1); }
     });
-    /*
-    rotate_button button_left_rotate = new rotate_button(.1, 4);
-    button_left_rotate.set_position((int)(Gdx.graphics.getWidth()*.1), 30);
-    
-    rotate_button button_right_rotate = new rotate_button(-.1, 5);
-    button_right_rotate.set_position((int)(Gdx.graphics.getWidth()*.15), 30);
-    */
-    
-    TextArea textMessage = new TextArea("",skin);
-    textMessage.setBounds(200, 0, 200, 30); //x_position, y_position, width, height)
-    
-    TextButton button_display_text = new TextButton("Display",skin);
-    button_display_text.setBounds(420, 0, 80, 30);
     
     button_display_text.addListener(new ClickListener(){
       @Override 
@@ -158,13 +143,15 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     ui.addActor(button_red);
     ui.addActor(button_green);
     ui.addActor(button_blue);
-	ui.addActor(button_orange);
-	ui.addActor(button_yellow);
-	ui.addActor(button_purple);
+    ui.addActor(button_orange);
+    ui.addActor(button_yellow);
+    ui.addActor(button_purple);
     ui.addActor(button_left_rotate);
+    ui.addActor(button_stop);
     ui.addActor(button_right_rotate);
     ui.addActor(textMessage);
     ui.addActor(button_display_text);
+    ui.addActor(button_upload);
     
     im.addProcessor(ui);
     im.addProcessor(new InputAdapter() {
