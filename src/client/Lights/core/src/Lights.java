@@ -82,6 +82,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     color_button button_orange = new color_button(255, 135, 0, 255, 4); //orange color_button
     color_button button_yellow = new color_button(255, 255, 0, 255, 5); //yellow color_button
     color_button button_purple = new color_button(185, 85, 210, 255, 6); //purple color_button
+	color_button button_black = new color_button(0, 0, 0, 255, 7);	//eraser
     
     TextButton button_left_rotate = new TextButton("<",skin);
     TextButton button_stop = new TextButton("X",skin);
@@ -98,6 +99,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     button_orange.set_position(30, (int)(color_pos*.6));
     button_yellow.set_position(30, (int)(color_pos*.5));
     button_purple.set_position(30, (int)(color_pos*.4));
+	button_black.set_position(30, (int)(color_pos*.3));
     
     button_left_rotate.setBounds(rotate_pos-30, 0, 30, 30); //x_position, y_position, width, height)
     button_stop.setBounds(rotate_pos, 0, 30, 30);
@@ -146,6 +148,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     ui.addActor(button_orange);
     ui.addActor(button_yellow);
     ui.addActor(button_purple);
+	ui.addActor(button_black);
     ui.addActor(button_left_rotate);
     ui.addActor(button_stop);
     ui.addActor(button_right_rotate);
