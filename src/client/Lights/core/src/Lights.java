@@ -84,7 +84,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     globe = new Globe(180, 28, .1f);
     ui = new Stage();
     
-    //button declarations - (r, g, b, a (alpha), location)
+    //button declarations - (r, g, b, alpha, String color location)
     color_button button_red = new color_button(255, 0, 0, 255, RED); //red color_button
     color_button button_green = new color_button(0, 255, 0, 255, GREEN); //green color_button
     color_button button_blue = new color_button(0, 0, 255, 255, BLUE); //blue color_button
@@ -97,7 +97,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     TextButton button_left_rotate = new TextButton("<",skin);
     TextButton button_stop = new TextButton("X",skin);
     TextButton button_right_rotate = new TextButton(">",skin);
-    final TextArea text_message = new TextArea("",skin);
+    final TextArea message_area = new TextArea("",skin);
     TextButton button_display_text = new TextButton("Display",skin);
     TextButton button_upload = new TextButton("Upload",skin);
     TextButton button_clear = new TextButton("Clear",skin);
@@ -116,7 +116,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     button_left_rotate.setBounds(rotate_pos-30, 0, 30, 30); //x_position, y_position, width, height)
     button_stop.setBounds(rotate_pos, 0, 30, 30);
     button_right_rotate.setBounds((int)(rotate_pos+30), 0, 30, 30);
-    text_message.setBounds(200, 0, 200, 30); 
+    message_area.setBounds(200, 0, 200, 30); 
     button_display_text.setBounds(420, 0, 80, 30);
     button_upload.setBounds((int)(Gdx.graphics.getWidth()-80), 0, 80, 30);
     button_clear.setBounds((int)(Gdx.graphics.getWidth()-80), 30, 80, 30);
@@ -141,17 +141,18 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
 	}
     });
     
+    // When the button_display_text is clicked, get the message text or create a default string value
     button_display_text.addListener(new ClickListener(){
       @Override 
       public void clicked(InputEvent event, float x, float y){    
-        // When the button_display_text is clicked, get the message text or create a default string value
-        //globe.layer_text(text_message.getText());   // + ("\n"); // Brute for a newline so readline gets a line
-        System.out.println( text_message.getText() );
-        globe.set_z(text_message.getText());
+        
+        //System.out.println( message_area.getText() );
+        globe.set_z(message_area.getText());
+        System.out.println( message_area.getText() );
       }
     });
     
-    //I believe this code is for touch screen capabilities on android platforms. not sure.
+    //I believe this code is for touch screen capabilities on android platforms. 
     /*
     button_red.setTouchable(Touchable.enabled); 
     button_green.setTouchable(Touchable.enabled);
@@ -170,7 +171,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     ui.addActor(button_left_rotate);
     ui.addActor(button_stop);
     ui.addActor(button_right_rotate);
-    ui.addActor(text_message);
+    ui.addActor(message_area);
     ui.addActor(button_display_text);
     ui.addActor(button_upload);
     ui.addActor(button_clear);
