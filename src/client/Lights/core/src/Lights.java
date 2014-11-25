@@ -90,6 +90,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     TextArea textMessage = new TextArea("",skin);
     TextButton button_display_text = new TextButton("Display",skin);
     TextButton button_upload = new TextButton("Upload",skin);
+	TextButton button_clear = new TextButton("Clear",skin);
     
     
     //button positioninng
@@ -107,6 +108,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     textMessage.setBounds(200, 0, 200, 30); 
     button_display_text.setBounds(420, 0, 80, 30);
     button_upload.setBounds((int)(Gdx.graphics.getWidth()-80), 0, 80, 30);
+	button_clear.setBounds((int)(Gdx.graphics.getWidth()-80), 30, 80, 30);
     
     
     //button functionality
@@ -133,6 +135,12 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
         */
       }
     });
+	
+	button_clear.addListener(new ClickListener(){
+      public void clicked(InputEvent event, float x, float y){
+		globe.SetColor(0, 0, 0, 255);
+	}
+    });
     
     //I believe this code is for touch screen capabilities on android platforms. not sure.
     /*
@@ -155,6 +163,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     ui.addActor(textMessage);
     ui.addActor(button_display_text);
     ui.addActor(button_upload);
+	ui.addActor(button_clear);
     
     im.addProcessor(ui);
     im.addProcessor(new InputAdapter() {
