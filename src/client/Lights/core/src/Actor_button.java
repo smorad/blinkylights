@@ -27,20 +27,17 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 
+
+
 //button is an Actor
 public class Actor_button extends Actor {
   Texture texture;
   float x_position = 0, y_position = 0;
   public boolean started = false;
   
-  public void initialize_actor_button(int index) {
-    if (index == 1) { texture = new Texture(Gdx.files.internal("red.png")); }
-    if (index == 2) { texture = new Texture(Gdx.files.internal("green.png")); }
-    if (index == 3) { texture = new Texture(Gdx.files.internal("blue.png")); }
-	if (index == 4) { texture = new Texture(Gdx.files.internal("orange.png")); }
-	if (index == 5) { texture = new Texture(Gdx.files.internal("yellow.png")); }
-	if (index == 6) { texture = new Texture(Gdx.files.internal("purple.png")); }
-	if (index == 7) { texture = new Texture(Gdx.files.internal("black.png")); }
+  public void initialize_actor_button(String color) {
+   
+    texture = new Texture(Gdx.files.internal(color));
     
     setBounds(x_position, y_position, texture.getWidth(), texture.getHeight());
     addListener(new InputListener(){

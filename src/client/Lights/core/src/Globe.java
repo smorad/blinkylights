@@ -32,13 +32,12 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 public class Globe
 {
    float speed = (float).1;
+   String z = "Kevin";
+   
+  
    //public void add_speed(double intput_speed) { speed += intput_speed; }
    
-   public void display_text(String text) 
-   {
    
-
-   }
    
    public void add_speed(float rotation)
    {
@@ -87,7 +86,7 @@ public class Globe
 
    Pixmap pixmap; //a raw image in memory as repesented by pixels
    byte colors[];
-
+   /*
    public Layer NewLayer()
    {
 
@@ -97,6 +96,23 @@ public class Globe
 
    	return layer;
    }
+   */
+   
+   public Layer layer_text(String text)
+   {
+     Layer layer = new Layer(columns, rows, text);
+     
+     layers.add(layer);
+     
+     return layer;
+   }
+    public void set_z(String text)
+   {
+      
+      z = text;
+      activeLayer = layer_text(z);
+      dirty = true;
+      }
    //write to file. called on click or mouse movement.
    public void PrintColors()
    {
@@ -274,7 +290,8 @@ public class Globe
       mesh.setVertices(t);
       mesh.setIndices(indicies);    
 
-   	activeLayer = NewLayer();
+      
+   	activeLayer = layer_text(z);
 
 
       SetColorAt(0, 15, 255, 255, 255, 255);
@@ -323,7 +340,7 @@ public class Globe
          
          
          //Suppressing the OutOfBoundsIndex bug by setting any negative values to 0
-         if (column < 0 || row < 0) { return new Coord(-1, -1, false); }
+         if (column < 0 || row < 0) { return new Coord(-1, -1, false); } //this produces other errors...
 
          System.out.format("%d   %d\n", column, row);
          return new Coord(column, row, true);

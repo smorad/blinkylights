@@ -36,7 +36,7 @@ import com.badlogic.gdx.Files.FileType;
 public class Layer
 {
 
-   Layer(int width, int height)
+   Layer(int width, int height, String text)
    {
 
       pix = new Pixmap(width, height, Pixmap.Format.RGBA8888);
@@ -54,13 +54,18 @@ public class Layer
     // get the glypth info
       data = font.getData();
       fontPixmap = new Pixmap(Gdx.files.internal(data.imagePaths[0]));
+      int text_length = text.length();
 
-
+      for (int i = 0; i < text_length; i++) {
+        DrawLetter(text.charAt(i), 0);
+      }
+      /*
       DrawLetter('H', 0);
       DrawLetter('e', 0);
       DrawLetter('l', 0);
       DrawLetter('l', 0);
       DrawLetter('o', 0);
+      */
 
    }
 
