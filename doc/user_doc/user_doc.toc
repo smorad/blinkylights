@@ -1,0 +1,7 @@
+\contentsline {section}{Table of Contents}{1}
+\contentsline {section}{Introduction}{2}
+\contentsline {section}{Hardware Setup}{3}
+\contentsline {section}{Bluetooth Setup}{4}
+\contentsline {section}{Operating the Software}{5}
+\contentsline {subsection}{a. Drawing on the Canvas}{6}
+\contentsline {subsection}{b. Displaying Text}{8}
