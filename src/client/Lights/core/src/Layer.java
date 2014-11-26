@@ -47,8 +47,8 @@ public class Layer
       this.height = height;
 
     // load the font
-    FileHandle handle = Gdx.files.getFileHandle("font/font.fnt",
-            FileType.Internal);
+    //FileHandle handle = Gdx.files.getFileHandle("font/font.fnt", FileType.Internal);
+    FileHandle handle = Gdx.files.getFileHandle("data/default.fnt", FileType.Internal);
     BitmapFont font = new BitmapFont(handle);
 
     // get the glypth info
