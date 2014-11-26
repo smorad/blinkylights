@@ -151,12 +151,7 @@ void loop() {
 	//check bt buffer for data, move it to our arrays
 	//no need to update LEDs, should sync upon sensor flag
 	if(bluetooth.available()){
-		for(i=0; i<sizeof(img); i++){
-			img[i] = serial.read();
-		}
-		//if buffer isn't empty, we fucked up
-		//lets empty it and await the next transfer
-		while(serial.read());
+		serial.readBytes(img, sizeof(img)); 
 	}  
 }
 
