@@ -78,12 +78,14 @@ public class Layer
    {
        Glyph glyph = data.getGlyph(letter);
 
-      // draw the character onto our base pixmap
-      advance -= glyph.getKerning(last);
 
-      pix.drawPixmap(fontPixmap, (int)advance + (width - glyph.width) / 2, (height - glyph.height) / 2,
+      advance += glyph.getKerning(letter);
+
+
+      pix.drawPixmap(fontPixmap, (int)advance + glyph.xoffset, (3 - (glyph.height + glyph.yoffset)),
       glyph.srcX, glyph.srcY, glyph.width, glyph.height);
-      advance += glyph.xadvance;    
+
+      advance += glyph.xadvance ;    
 
       last = letter;
 
