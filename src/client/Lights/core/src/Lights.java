@@ -26,8 +26,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+//import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -79,7 +79,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     int rotate_pos = (int)(Gdx.graphics.getWidth()*.1);
     int color_pos =  (int)(Gdx.graphics.getHeight());
     
-    Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+    Skin skin = new Skin(Gdx.files.internal("data/uiskin.json")); //font skin
     InputMultiplexer im = new InputMultiplexer(); //allows for multiple event handling.
     globe = new Globe(180, 28, .1f);
     ui = new Stage();
@@ -97,7 +97,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     TextButton button_left_rotate = new TextButton("<",skin);
     TextButton button_stop = new TextButton("X",skin);
     TextButton button_right_rotate = new TextButton(">",skin);
-    final TextArea message_area = new TextArea("",skin);
+    final TextField text_box = new TextField("",skin);
     TextButton button_display_text = new TextButton("Display",skin);
     TextButton button_upload = new TextButton("Upload",skin);
     TextButton button_clear = new TextButton("Clear",skin);
@@ -116,7 +116,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     button_left_rotate.setBounds(rotate_pos-30, 0, 30, 30); //x_position, y_position, width, height)
     button_stop.setBounds(rotate_pos, 0, 30, 30);
     button_right_rotate.setBounds((int)(rotate_pos+30), 0, 30, 30);
-    message_area.setBounds(200, 0, 200, 30); 
+    text_box.setBounds(200, 0, 200, 30); 
     button_display_text.setBounds(420, 0, 80, 30);
     button_upload.setBounds((int)(Gdx.graphics.getWidth()-80), 0, 80, 30);
     button_clear.setBounds((int)(Gdx.graphics.getWidth()-80), 30, 80, 30);
@@ -137,8 +137,8 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     
     button_clear.addListener(new ClickListener(){
       public void clicked(InputEvent event, float x, float y){
-		globe.SetColor(0, 0, 0, 255);
-	}
+        globe.SetColor(0, 0, 0, 255);
+      }
     });
     
     // When the button_display_text is clicked, get the message text or create a default string value
@@ -146,9 +146,10 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
       @Override 
       public void clicked(InputEvent event, float x, float y){    
         
-        //System.out.println( message_area.getText() );
-        globe.set_z(message_area.getText());
-        System.out.println( message_area.getText() );
+        String text = text_box.getText().replaceAll("\n", "");
+        globe.set_globe_text(text);
+        System.out.println(text);
+        text_box.setText(""); //clear the textbox after the characters are uploaded
       }
     });
     
@@ -171,7 +172,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     ui.addActor(button_left_rotate);
     ui.addActor(button_stop);
     ui.addActor(button_right_rotate);
-    ui.addActor(message_area);
+    ui.addActor(text_box);
     ui.addActor(button_display_text);
     ui.addActor(button_upload);
     ui.addActor(button_clear);

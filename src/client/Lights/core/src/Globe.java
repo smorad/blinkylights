@@ -32,7 +32,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 public class Globe
 {
   float speed = (float).1;
-  String z = "Kevin";
+  String globe_text = "";
   
   
   //public void add_speed(double intput_speed) { speed += intput_speed; }
@@ -84,19 +84,8 @@ public class Globe
   float step;
   Texture texture;
 
-  Pixmap pixmap; //a raw image in memory as repesented by pixels
+  Pixmap pixmap; //a raw image in memory as represented by pixels
   byte colors[];
-  /*
-  public Layer NewLayer()
-  {
-
-    Layer layer = new Layer(columns, rows);
-
-    layer_array.add(layer);
-
-    return layer;
-  }
-  */
   
   public Layer layer_text(String text)
   {
@@ -106,14 +95,15 @@ public class Globe
     
     return layer;
   }
-  public void set_z(String text)
+  
+  public void set_globe_text(String text)
   {
-    
-    z = text;
-    activeLayer = layer_text(z);
+    globe_text = text;
+    activeLayer = layer_text(globe_text);
     
     dirty = true;
   }
+  
   //write to file. called on click or mouse movement.
   public void PrintColors()
   {
@@ -144,7 +134,6 @@ public class Globe
   //helper function for manual color setting.
   public void SetColorAt(int column, int row, int r, int g, int b, int a)
   {
-    
     int rr = ((column + (int)activeLayer.x)%columns + columns)%columns;
     int cc = row + (int)activeLayer.y; 
 
@@ -166,8 +155,6 @@ public class Globe
     {
       for (int j = 0; j < columns; j++ ) 
       {
-
-        
         int at = ((int)Mod(j + layer_array.get(layer_array.size()-1).x, layer_array.get(layer_array.size()-1).width)  + (i+(int)layer_array.get(layer_array.size()-1).y) * columns)*4;
 
         int r = layer_array.get(layer_array.size()-1).GetPixelAt(((at+0)%count + count) % count);
@@ -290,11 +277,9 @@ public class Globe
     }
     mesh.setVertices(t);
     mesh.setIndices(indicies);    
-
     
-    activeLayer = layer_text(z);
-
-
+    activeLayer = layer_text("");
+    
     SetColorAt(0, 15, 255, 255, 255, 255);
     SetColorAt(0, 14, 0, 255, 0, 255);
     SetColorAt(0, 13, 0, 0, 255, 255);

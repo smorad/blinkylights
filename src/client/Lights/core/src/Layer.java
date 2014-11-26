@@ -59,14 +59,6 @@ public class Layer
       for (int i = 0; i < text_length; i++) {
         DrawLetter(text.charAt(i), 0);
       }
-      /*
-      DrawLetter('H', 0);
-      DrawLetter('e', 0);
-      DrawLetter('l', 0);
-      DrawLetter('l', 0);
-      DrawLetter('o', 0);
-      */
-
    }
 
    BitmapFontData data;
