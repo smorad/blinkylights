@@ -37,11 +37,14 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
   public static final String RED  = "colors/red.png";
   public static final String GREEN = "colors/green.png";
   public static final String BLUE = "colors/blue.png";
-  public static final String ORANGE = "colors/orange.png";
+  public static final String CYAN = "colors/cyan.png";
   public static final String YELLOW = "colors/yellow.png";
-  public static final String PURPLE = "colors/purple.png";
+  public static final String MAGENTA = "colors/magenta.png";
   public static final String WHITE = "colors/white.png";
-  public static final String BLACK = "colors/black.png";
+  public static final String ERASER = "colors/eraser.png";
+
+  static final int N_ROWS = 34;
+  static final int N_COLUMNS = 180;
 
   int r = 255;
   int b = 0;
@@ -81,18 +84,18 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     
     Skin skin = new Skin(Gdx.files.internal("data/uiskin.json")); //font skin
     InputMultiplexer im = new InputMultiplexer(); //allows for multiple event handling.
-    globe = new Globe(180, 28, .1f);
+    globe = new Globe(N_COLUMNS, N_ROWS, .1f);
     ui = new Stage();
     
     //button declarations - (r, g, b, alpha, String color location)
     color_button button_red = new color_button(255, 0, 0, 255, RED); //red color_button
     color_button button_green = new color_button(0, 255, 0, 255, GREEN); //green color_button
     color_button button_blue = new color_button(0, 0, 255, 255, BLUE); //blue color_button
-    color_button button_orange = new color_button(255, 135, 0, 255, ORANGE); //orange color_button
+    color_button button_orange = new color_button(0, 255, 255, 255, CYAN); //cyan color_button
     color_button button_yellow = new color_button(255, 255, 0, 255, YELLOW); //yellow color_button
-    color_button button_purple = new color_button(185, 85, 210, 255, PURPLE); //purple color_button
+    color_button button_purple = new color_button(255, 0, 255, 255, MAGENTA); //magenta color_button
     color_button button_white = new color_button(255, 255, 255, 255, WHITE); //white color_button
-    color_button button_black = new color_button(0, 0, 0, 255, BLACK); //eraser
+    color_button button_black = new color_button(0, 0, 0, 255, ERASER); //eraser
     
     TextButton button_left_rotate = new TextButton("<",skin);
     TextButton button_stop = new TextButton("X",skin);

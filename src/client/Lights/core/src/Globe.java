@@ -31,6 +31,21 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 public class Globe
 {
+  private Mesh mesh;
+  private ShaderProgram shader;
+  private int n_columns;
+  private int n_rows;
+  private float rotation = 90;
+  private boolean dirty = true;
+
+  ArrayList<Layer> layer_array = new ArrayList<Layer>();
+  Layer activeLayer;
+  float step;
+  Texture texture;
+
+  Pixmap pixmap; //a raw image in memory as represented by pixels
+  byte colors[];
+
   float speed = (float).1;
   String globe_text = "";
   
@@ -69,27 +84,10 @@ public class Globe
     boolean valid;
     public int column,row;
   }
-
-
-  private Mesh mesh;
-  private ShaderProgram shader;
-  private int columns;
-  private int rows;
-  private float rotation = 90;
-  private boolean dirty = true;
-
-  
-  ArrayList<Layer> layer_array = new ArrayList<Layer>();
-  Layer activeLayer;
-  float step;
-  Texture texture;
-
-  Pixmap pixmap; //a raw image in memory as represented by pixels
-  byte colors[];
   
   public Layer layer_text(String text)
   {
-    Layer layer = new Layer(columns, rows, text);
+    Layer layer = new Layer(n_columns, n_rows, text);
     
     layer_array.add(layer);
     
@@ -122,9 +120,9 @@ public class Globe
   //set all the LEDs on the screen
   public void SetColor(int r, int g, int b, int a)
   {
-    for (int i =0; i < rows; i++ ) 
+    for (int i =0; i < n_rows; i++ ) 
     {
-      for (int j = 0; j < columns; j++ ) 
+      for (int j = 0; j < n_columns; j++ ) 
       {
         SetColorAt(j, i,r, g, b, a);
       }
@@ -134,7 +132,7 @@ public class Globe
   //helper function for manual color setting.
   public void SetColorAt(int column, int row, int r, int g, int b, int a)
   {
-    int rr = ((column + (int)activeLayer.x)%columns + columns)%columns;
+    int rr = ((column + (int)activeLayer.x)%n_columns + n_columns)%n_columns;
     int cc = row + (int)activeLayer.y; 
 
     activeLayer.SetColorAt(rr, cc, r, g, b, a);
@@ -149,23 +147,23 @@ public class Globe
 
   public void FillColors()
   {
-    int count = rows * columns * 4;
+    int count = n_rows * n_columns * 4;
 
-    for (int i =0; i < rows; i++ ) 
+    for (int i =0; i < n_rows; i++ ) 
     {
-      for (int j = 0; j < columns; j++ ) 
+      for (int j = 0; j < n_columns; j++ ) 
       {
-        int at = ((int)Mod(j + layer_array.get(layer_array.size()-1).x, layer_array.get(layer_array.size()-1).width)  + (i+(int)layer_array.get(layer_array.size()-1).y) * columns)*4;
+        int at = ((int)Mod(j + layer_array.get(layer_array.size()-1).x, layer_array.get(layer_array.size()-1).width)  + (i+(int)layer_array.get(layer_array.size()-1).y) * n_columns)*4;
 
         int r = layer_array.get(layer_array.size()-1).GetPixelAt(((at+0)%count + count) % count);
         int g = layer_array.get(layer_array.size()-1).GetPixelAt(((at+1)%count + count) % count);
         int b = layer_array.get(layer_array.size()-1).GetPixelAt(((at+2)%count + count) % count);
         int a = layer_array.get(layer_array.size()-1).GetPixelAt(((at+3)%count + count) % count);
 
-        pixmap.getPixels().put((rows-1-i + j * rows)*4, (byte)r);
-        pixmap.getPixels().put((rows-1-i + j * rows)*4+1, (byte)g);
-        pixmap.getPixels().put((rows-1-i + j * rows)*4+2, (byte)b);
-        pixmap.getPixels().put((rows-1-i + j * rows)*4+3, (byte)255);
+        pixmap.getPixels().put((n_rows-1-i + j * n_rows)*4, (byte)r);
+        pixmap.getPixels().put((n_rows-1-i + j * n_rows)*4+1, (byte)g);
+        pixmap.getPixels().put((n_rows-1-i + j * n_rows)*4+2, (byte)b);
+        pixmap.getPixels().put((n_rows-1-i + j * n_rows)*4+3, (byte)255);
 
       }
     }
@@ -183,9 +181,8 @@ public class Globe
   public Globe(int columns, int rows, float step)
   {
 
-
-    this.columns = columns;
-    this.rows = rows;
+    this.n_columns = columns;
+    this.n_rows = rows;
     this.step = step;
 
     shader = new ShaderProgram
@@ -196,7 +193,7 @@ public class Globe
 
 
     int components = 7; //position 3 + texture 2 + offset 2 (for smooth shading)
-    mesh = new Mesh(true, rows*columns*components, rows*columns*6,
+    mesh = new Mesh(true, n_rows*n_columns*components, n_rows*n_columns*6,
     new VertexAttribute(Usage.Position, 3, "a_position"),
     new VertexAttribute(Usage.TextureCoordinates, 2, "a_texCoords"),
     new VertexAttribute(Usage.Position, 2, "a_offset"));          
@@ -204,7 +201,7 @@ public class Globe
 
     //A Pixmap is basically a raw image in memory as represented by pixels
     //Pixmap (row) wide, (column) height) using 8 bytes for Red, Green, Blue and Alpha channels
-    pixmap = new Pixmap( rows, columns, Format.RGBA8888 );
+    pixmap = new Pixmap( n_rows, n_columns, Format.RGBA8888 );
     pixmap.setColor( 0, 0, 0, 0);   
     pixmap.fill(); //fills pixmap to all black. (should turn off all LED on actual globe.)
 
@@ -213,27 +210,27 @@ public class Globe
     texture = new Texture( pixmap );
 
     //Generate the vertex data for a sphere
-    VertexData verts[][][] = new VertexData[rows][columns][4];
-    for (int r = 0; r < rows; r++)
+    VertexData verts[][][] = new VertexData[n_rows][n_columns][4];
+    for (int r = 0; r < n_rows; r++)
     {
-      for (int c = 0; c < columns; c++)
+      for (int c = 0; c < n_columns; c++)
       {
 
-        float angle1 = c/(float)columns*3.1416f*2.0f;
-        float angle2 = (c+1)/(float)columns*3.1416f*2.0f;
+        float angle1 = c/(float)n_columns*3.1416f*2.0f;
+        float angle2 = (c+1)/(float)n_columns*3.1416f*2.0f;
 
         //Find the radius of this band using x^2 + y^2 = r^2 r = 1 since its a unit circle.
-        float radius1 =   (float)Math.sqrt(1.0f - 4 * ((r)/(float)rows-.5f) * ((r)/(float)rows-.5f));
-        float radius2 =   (float)Math.sqrt(1.0f - 4 * ((r+1)/(float)rows -.5f) * ((r+1)/(float)rows-.5f));
+        float radius1 =   (float)Math.sqrt(1.0f - 4 * ((r)/(float)n_rows-.5f) * ((r)/(float)n_rows-.5f));
+        float radius2 =   (float)Math.sqrt(1.0f - 4 * ((r+1)/(float)n_rows -.5f) * ((r+1)/(float)n_rows-.5f));
 
 
-        Vector3 p1 = new Vector3(radius1*(float)Math.cos(angle1), r/(float)rows*2, radius1*(float)Math.sin(angle1));
-        Vector3 p2 = new Vector3(radius1*(float)Math.cos(angle2), r/(float)rows*2, radius1*(float)Math.sin(angle2));
+        Vector3 p1 = new Vector3(radius1*(float)Math.cos(angle1), r/(float)n_rows*2, radius1*(float)Math.sin(angle1));
+        Vector3 p2 = new Vector3(radius1*(float)Math.cos(angle2), r/(float)n_rows*2, radius1*(float)Math.sin(angle2));
 
-        Vector3 p3 = new Vector3(radius2*(float)Math.cos(angle1), (r+1)/(float)rows*2, radius2*(float)Math.sin(angle1));
-        Vector3 p4 = new Vector3(radius2*(float)Math.cos(angle2), (r+1)/(float)rows*2, radius2*(float)Math.sin(angle2));
+        Vector3 p3 = new Vector3(radius2*(float)Math.cos(angle1), (r+1)/(float)n_rows*2, radius2*(float)Math.sin(angle1));
+        Vector3 p4 = new Vector3(radius2*(float)Math.cos(angle2), (r+1)/(float)n_rows*2, radius2*(float)Math.sin(angle2));
 
-        Vector2 textureCoord = new Vector2((float)r/(float)rows + .5f/rows, (float)c/(float)columns + .5f/columns);
+        Vector2 textureCoord = new Vector2((float)r/(float)n_rows + .5f/n_rows, (float)c/(float)n_columns + .5f/n_columns);
 
         
         verts[r][c][0] = new VertexData(p1, textureCoord, new Vector2(-1, -1));
@@ -244,9 +241,9 @@ public class Globe
     }
 
     //6 indicies for 2 triangles to draw 1 quad.
-    short indicies[] = new short[columns*6*rows];
+    short indicies[] = new short[n_columns*6*n_rows];
     int j = 0;
-    for (short i = 0; i < columns*6*rows; i+= 6, j++)
+    for (int i = 0; i < n_columns*6*n_rows; i+= 6, j++)
     {
       indicies[i+0] = (short)(j*4+0);
       indicies[i+1] = (short)(j*4+1);
@@ -258,21 +255,21 @@ public class Globe
     }
 
     //Flatten the data into a single block to upload... fuck java's type system
-    float t[] = new float[rows*columns*components*4];
-    for (int r = 0; r < rows; r++) 
-    for (int i = 0; i < columns; i++) 
+    float t[] = new float[n_rows*n_columns*components*4];
+    for (int r = 0; r < n_rows; r++) 
+    for (int i = 0; i < n_columns; i++) 
     {
       for (int k = 0; k < 4; k++)
       { 
-        t[r*columns*4*components + i*4*components + k*components + 0] = verts[r][i][k].position.x;
-        t[r*columns*4*components + i*4*components + k*components + 1] = verts[r][i][k].position.y;
-        t[r*columns*4*components + i*4*components + k*components + 2] = verts[r][i][k].position.z;
+        t[r*n_columns*4*components + i*4*components + k*components + 0] = verts[r][i][k].position.x;
+        t[r*n_columns*4*components + i*4*components + k*components + 1] = verts[r][i][k].position.y;
+        t[r*n_columns*4*components + i*4*components + k*components + 2] = verts[r][i][k].position.z;
 
-        t[r*columns*4*components + i*4*components + k*components + 3] = verts[r][i][k].texture.x;
-        t[r*columns*4*components + i*4*components + k*components + 4] = verts[r][i][k].texture.y;
+        t[r*n_columns*4*components + i*4*components + k*components + 3] = verts[r][i][k].texture.x;
+        t[r*n_columns*4*components + i*4*components + k*components + 4] = verts[r][i][k].texture.y;
 
-        t[r*columns*4*components + i*4*components + k*components + 5] = verts[r][i][k].offset.x;
-        t[r*columns*4*components + i*4*components + k*components + 6] = verts[r][i][k].offset.y;
+        t[r*n_columns*4*components + i*4*components + k*components + 5] = verts[r][i][k].offset.x;
+        t[r*n_columns*4*components + i*4*components + k*components + 6] = verts[r][i][k].offset.y;
       }
     }
     mesh.setVertices(t);
@@ -299,10 +296,10 @@ public class Globe
     Gdx.gl.glReadPixels( screenX, Gdx.graphics.getHeight()-screenY, 1, 1, GL20.GL_DEPTH_COMPONENT, GL20.GL_FLOAT, buffer);
 
     float depth = buffer.getFloat(0);
+    float horiz_degree = 360 / n_columns;
 
-
-    float x = ((float)screenX/Gdx.graphics.getWidth() - 0.5f) * 2.0f;
-    float y = ((float)screenY/Gdx.graphics.getHeight() - 0.5f) * 2.0f;
+    float x = ((float)screenX/Gdx.graphics.getWidth() - 0.5f) * 2;
+    float y = ((float)screenY/Gdx.graphics.getHeight() - 0.5f) * 2;
     float z = (float)Math.cos(x*3.1415f/2.0);
 
     if (depth != 1.0)
@@ -316,13 +313,14 @@ public class Globe
 
 
       float angle = (float)Math.acos(v.x/radius);
-      System.out.format("%f\n", angle/3.1415*180);
+      System.out.format("%f\n", angle/3.1415*n_columns);
 
-      int column = (int)((((360 - angle/3.1415*180 + rotation)/2.0) % columns) + columns)%columns;
+      int column = (int)((((360 - angle/3.1415*n_columns + rotation)/2.0) % n_columns) + n_columns)%n_columns;
 
-      int row = (int)(v.y*rows)/2;
-      row = row >= 28 ? 27 : row;
-      row = rows - 1   - row;
+      // WTF lol???? whats this do
+      int row = (int)(v.y*n_rows)/2;
+      row = row >= n_rows ? n_rows-1 : row;
+      row = n_rows - 1 - row;
       
       
       //Suppressing the OutOfBoundsIndex bug by setting any negative values to 0
@@ -371,7 +369,7 @@ public class Globe
     shader.begin();
 
     shader.setUniformMatrix(shader.getUniformLocation("viewProjection"), p);
-    mesh.render(shader, GL20.GL_TRIANGLES, 0, rows*columns*6);
+    mesh.render(shader, GL20.GL_TRIANGLES, 0, n_rows*n_columns*6);
     shader.end();
 
   }

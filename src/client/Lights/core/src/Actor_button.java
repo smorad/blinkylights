@@ -31,6 +31,7 @@ import com.badlogic.gdx.InputProcessor;
 
 //button is an Actor
 public class Actor_button extends Actor {
+  final int IMG_SIZE = 32;
   Texture texture;
   float x_position = 0, y_position = 0;
   public boolean started = false;
@@ -39,7 +40,7 @@ public class Actor_button extends Actor {
    
     texture = new Texture(Gdx.files.internal(color));
     
-    setBounds(x_position, y_position, texture.getWidth(), texture.getHeight());
+    setBounds(x_position, y_position, IMG_SIZE, IMG_SIZE);
     addListener(new InputListener(){
       public boolean touchDown (InputEvent event, float r, float g, int pointer, int Actor_button) {
         ((Actor_button)event.getTarget()).started = true;
@@ -49,13 +50,13 @@ public class Actor_button extends Actor {
   }
   
   public void set_position(int x, int y) { 
-    x_position = x - texture.getWidth()/2;
-    y_position = y - texture.getHeight()/2;
-    setBounds(x_position, y_position, texture.getWidth(), texture.getHeight());
+    x_position = x - IMG_SIZE/2;
+    y_position = y - IMG_SIZE/2;
+    setBounds(x_position, y_position, IMG_SIZE, IMG_SIZE);
   }
   
   @Override
   public void draw(Batch batch, float alpha) {
-    batch.draw(texture, x_position, y_position);
+    batch.draw(texture, x_position, y_position, IMG_SIZE, IMG_SIZE);
   }
 }
