@@ -109,9 +109,4 @@ public class SerialTest implements SerialPortEventListener {
         // Ignore all the other eventTypes, but you should consider the other ones.
     }
 
-    public static void main(String[] args) throws Exception {
-        SerialTest main = new SerialTest();
-        main.initialize();
-        System.out.println("Started");
-    }
 }
