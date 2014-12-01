@@ -14,7 +14,7 @@ public class SerialTest implements SerialPortEventListener {
     private static final String PORT_NAMES[] = {
             "/dev/tty.usbmodem411", // Mac OS X
             "/dev/ttyUSB0", // Linux
-            "COM3", // Windows
+            "COM3" // Windows
             };
     /** Buffered input stream from the port */
     private InputStream input;
@@ -25,8 +25,10 @@ public class SerialTest implements SerialPortEventListener {
     /** Default bits per second for COM port. */
     private static final int DATA_RATE = 115200;
 
+    private CommPortIdentifier portId;
+
     public void initialize() {
-        CommPortIdentifier portId = null;
+        portId = null;
         Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
         // iterate through, looking for the port
@@ -88,6 +90,14 @@ public class SerialTest implements SerialPortEventListener {
         } catch (Exception e) {
             System.err.println(e.toString());
         }
+    }
+
+    /**
+     * Return True if this object is connected to an open serial port,
+     * else return False.
+     */
+    public synchronized boolean isConnected() {
+        return !(portId == null);
     }
 
     /**

@@ -46,6 +46,8 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
   static final int N_ROWS = 34;
   static final int N_COLUMNS = 180;
 
+  SerialTest bluetooth;
+
   int r = 255;
   int b = 0;
   int g = 0;
@@ -143,6 +145,12 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
         globe.SetColor(0, 0, 0, 255);
       }
     });
+
+    button_upload.addListener(new ClickListener(){
+      public void clicked(InputEvent event, float x, float y){
+        sendFrame();
+      }
+    });
     
     // When the button_display_text is clicked, get the message text or create a default string value
     button_display_text.addListener(new ClickListener(){
@@ -207,6 +215,11 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     });
     globe.PrintColors();
     Gdx.input.setInputProcessor(im); //set to process input multiplexor
+
+    // bluetooth
+    bluetooth = new SerialTest();
+    bluetooth.initialize();
+
   }
 
   @Override
@@ -216,5 +229,47 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
     
     ui.act(Gdx.graphics.getDeltaTime()); //allows for actor events handling.
     ui.draw(); //draws the stage otherwise actors are invisible. functional, but invisible.
+  }
+
+  /**
+   * Send a compressed pixmap to the LED orb
+   */
+  public void sendFrame () {
+    // attempt to connect if disconnected
+    if (!bluetooth.isConnected()) { 
+      bluetooth.initialize();
+      return;
+    }
+
+    int size = N_COLUMNS*N_ROWS + 2;
+    byte[] serializedFrame = new byte[size];
+    serializedFrame[0] = (byte)128;           // start byte
+    serializedFrame[size - 1] = (byte)128;    // end byte
+
+    // compress pixels into 3 bits
+    for (int i = 0; i < N_ROWS; i++) {
+      for (int j = N_COLUMNS-1; j >= 0; j--) {
+        // buffer indices
+        int s_index = 1 + (i + (N_COLUMNS-1-j) * N_ROWS);
+        int p_index = (N_ROWS-1-i + j*N_ROWS)*4;
+
+        // initialize byte
+        serializedFrame[s_index] = (byte)0;
+
+        if (globe.pixmap.getPixels().get(p_index + 0) != 0) { // r
+          serializedFrame[s_index] |= 1;
+        }
+        if (globe.pixmap.getPixels().get(p_index + 1) != 0) { // g
+          serializedFrame[s_index] |= 2;
+        }
+        if (globe.pixmap.getPixels().get(p_index + 2) != 0) { // b
+          serializedFrame[s_index] |= 4;
+        }
+      }
+    }
+
+    bluetooth.send(serializedFrame);
+    System.out.println("frame sent");
+
   }
 }

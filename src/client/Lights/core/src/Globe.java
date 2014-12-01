@@ -37,16 +37,16 @@ public class Globe
   private float rotation = 90;
   private boolean dirty = true;
 
-  ArrayList<Layer> layer_array = new ArrayList<Layer>();
-  Layer activeLayer;
-  float step;
-  Texture texture;
+  public ArrayList<Layer> layer_array = new ArrayList<Layer>();
+  public Layer activeLayer;
+  private float step;
+  private Texture texture;
 
-  Pixmap pixmap; //a raw image in memory as represented by pixels
-  byte colors[];
+  public Pixmap pixmap; //a raw image in memory as represented by pixels
+  private byte colors[];
 
-  float speed = (float).1;
-  String globe_text = "";
+  private float speed = (float).1;
+  private String globe_text = "";
   
   
   //public void add_speed(double intput_speed) { speed += intput_speed; }

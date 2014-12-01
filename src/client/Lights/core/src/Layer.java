@@ -105,7 +105,6 @@ public class Layer
       }
    }
 
-
    //helper function for manual color setting.
    public void SetColorAt(int x, int yy, int r, int g, int b, int a)
    {
