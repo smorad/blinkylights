@@ -314,7 +314,7 @@ public class Globe
       float angle = (float)Math.acos(v.x/radius);
       System.out.format("%f\n", angle/3.1415*n_columns);
 
-      int column = (int)((((360 - angle/3.1415*n_columns + rotation)/2.0) % n_columns) + n_columns)%n_columns;
+      int column = (int)((((360 - angle/3.1415*n_columns + rotation)/(360.0/n_columns)) % n_columns) + n_columns)%n_columns;
 
       // WTF lol???? whats this do
       int row = (int)(v.y*n_rows)/2;
