@@ -44,7 +44,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
   public static final String ERASER = "colors/eraser.png";
 
   static final int N_ROWS = 34;
-  static final int N_COLUMNS = 180;
+  static final int N_COLUMNS = 120;
 
   SerialTest bluetooth;
 
