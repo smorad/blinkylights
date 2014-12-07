@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 ci:
-	git add src/ doc/ bin/ Makefile 
+	git add src/ doc/ Makefile 
 	git commit
 	git push https://github.com/smorad/blinkylights master
 
