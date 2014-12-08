@@ -95,7 +95,7 @@ public class Layer
       pix.drawPixmap(fontPixmap, (int)advance + glyph.xoffset, (10 - (glyph.height + glyph.yoffset)),
       glyph.srcX, glyph.srcY, glyph.width, glyph.height);
 
-      advance += glyph.xadvance/1.25;    
+      advance += glyph.width + 1;    
 
       last = letter;
 
