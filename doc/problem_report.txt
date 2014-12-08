@@ -1,0 +1,4 @@
+Known problems:
+	Client may crash after trying to draw after powering down the orb
+		Location: Client application
+		Possible Remedy: Raise exception to crash more gracefully
