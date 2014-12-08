@@ -48,7 +48,7 @@ public class Layer
 
     // load the font
     //FileHandle handle = Gdx.files.getFileHandle("font/font.fnt", FileType.Internal);
-    FileHandle handle = Gdx.files.getFileHandle("data/default.fnt", FileType.Internal);
+    FileHandle handle = Gdx.files.getFileHandle("font.fnt", FileType.Internal);
     BitmapFont font = new BitmapFont(handle);
 
     // get the glypth info
@@ -68,16 +68,22 @@ public class Layer
 
    void DrawLetter(char letter, int at)
    {
+      if (letter == ' ')
+      {
+        advance += 4;
+        return;  
+      }
        Glyph glyph = data.getGlyph(letter);
 
 
       advance += glyph.getKerning(letter);
 
 
+      advance += glyph.xadvance -3;    
+
       pix.drawPixmap(fontPixmap, (int)advance + glyph.xoffset, (3 - (glyph.height + glyph.yoffset)),
       glyph.srcX, glyph.srcY, glyph.width, glyph.height);
 
-      advance += glyph.xadvance ;    
 
       last = letter;
 
