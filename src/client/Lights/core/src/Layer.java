@@ -89,10 +89,10 @@ public class Layer
        Glyph glyph = data.getGlyph(letter);
 
 
-      advance += glyph.getKerning(letter);
+      //advance += glyph.getKerning(letter);
 
 
-      pix.drawPixmap(fontPixmap, (int)advance + glyph.xoffset, (10 - (glyph.height + glyph.yoffset)),
+      pix.drawPixmap(fontPixmap, (int)advance, (10 - (glyph.height + glyph.yoffset)),
       glyph.srcX, glyph.srcY, glyph.width, glyph.height);
 
       advance += glyph.width + 1;    
