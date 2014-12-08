@@ -1,4 +1,23 @@
 To test, we will do the following:
+	
+	System Testing:
+		User Story 1:
+			Preload a hardcoded smiley face into the data storage on the chip. Power on the orb and ensure the smiley face appears.
+
+		User Story 2:
+			Draw a smiley on the app, look at the binary data sent over serial and ensure the format is correct
+
+		User Story 3:
+			Pair the client bluetooth with the orb bluetooth, send a rainbow over to the orb and ensure it is visible.
+
+		User Story 4:
+			Draw on the app using each color, ensuring no crashes occur
+		
+		User Story 5: This user story was canned after we realized our LEDs don't have the required precision
+
+		User Story 6: Type "Hello, World" into the application and ensure the orb is displaying "Hello, World"
+
+		User Story 7: Log RPM data to a file and ensure that the actual RPM is within 5% of the target RPM
 
 	Blackbox testing:
 		Try and draw different objects
@@ -8,4 +27,5 @@ To test, we will do the following:
 		See if it's possible to overflow the bluetooth buffer with a normal use case
 		See if it's possible for bad data to enter the bluetooth buffer
 
+		
 
