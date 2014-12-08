@@ -312,7 +312,7 @@ public class Globe
 
 
       float angle = (float)Math.acos(v.x/radius);
-      System.out.format("%f\n", angle/3.1415*n_columns);
+     // System.out.format("%f\n", angle/3.1415*n_columns);
 
       int column = (int)((((360 - angle/3.1415*180 + rotation)/(360.0/n_columns)) % n_columns) + n_columns)%n_columns;
 
@@ -325,7 +325,7 @@ public class Globe
       //Suppressing the OutOfBoundsIndex bug by setting any negative values to 0
       if (column < 0 || row < 0) { return new Coord(-1, -1, false); } //this produces other errors...
 
-      System.out.format("%d   %d\n", column, row);
+     // System.out.format("%d   %d\n", column, row);
       return new Coord(column, row, true);
 
     }
