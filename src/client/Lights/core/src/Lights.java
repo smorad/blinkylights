@@ -158,7 +158,7 @@ public class Lights extends ApplicationAdapter implements ApplicationListener
       public void clicked(InputEvent event, float x, float y){    
         
         String text = text_box.getText().replaceAll("\n", "");
-        globe.set_globe_text(text);
+        globe.set_globe_text(text, r, g, b, a);
         System.out.println(text);
         text_box.setText(""); //clear the textbox after the characters are uploaded
       }

@@ -36,7 +36,7 @@ import com.badlogic.gdx.Files.FileType;
 public class Layer
 {
 
-   Layer(int width, int height, String text)
+   Layer(int width, int height, String text, int r, int g, int b, int a)
    {
 
       pix = new Pixmap(width, height, Pixmap.Format.RGBA8888);
@@ -55,6 +55,19 @@ public class Layer
       data = font.getData();
       fontPixmap = new Pixmap(Gdx.files.internal(data.imagePaths[0]));
       int text_length = text.length();
+
+    fontPixmap = new Pixmap(Gdx.files.internal(data.imagePaths[0]));
+
+      ByteBuffer bb = fontPixmap.getPixels();
+
+      for (int i = 0; i < fontPixmap.getHeight() * fontPixmap.getWidth() ; i++ )
+      {
+        bb.put(i*4 +0, (byte)((float)bb.get(i*4 +0) * r/255.0));
+        bb.put(i*4 +1, (byte)((float)bb.get(i*4 +1) * g/255.0));
+        bb.put(i*4 +2, (byte)((float)bb.get(i*4 +2) * b/255.0));
+        bb.put(i*4 +3, (byte)((float)bb.get(i*4 +3) * a/255.0));
+
+      }
 
       for (int i = 0; i < text_length; i++) {
         DrawLetter(text.charAt(i), 0);
@@ -77,7 +90,6 @@ public class Layer
 
 
       advance += glyph.getKerning(letter);
-
 
 
       pix.drawPixmap(fontPixmap, (int)advance + glyph.xoffset, (6 - (glyph.height + glyph.yoffset)),

@@ -84,19 +84,19 @@ public class Globe
     public int column,row;
   }
   
-  public Layer layer_text(String text)
+  public Layer layer_text(String text, int r, int g, int b, int a)
   {
-    Layer layer = new Layer(n_columns, n_rows, text);
+    Layer layer = new Layer(n_columns, n_rows, text, r, g, b, a);
     
     layer_array.add(layer);
     
     return layer;
   }
   
-  public void set_globe_text(String text)
+  public void set_globe_text(String text, int r, int g, int b, int a)
   {
     globe_text = text;
-    activeLayer = layer_text(globe_text);
+    activeLayer = layer_text(globe_text, r, g, b, a);
     
     dirty = true;
   }
@@ -274,7 +274,7 @@ public class Globe
     mesh.setVertices(t);
     mesh.setIndices(indicies);    
     
-    activeLayer = layer_text("");
+    activeLayer = layer_text("", 255, 255, 255, 255);
     
     SetColorAt(0, 15, 255, 255, 255, 255);
     SetColorAt(0, 14, 0, 255, 0, 255);
