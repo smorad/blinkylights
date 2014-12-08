@@ -2,3 +2,7 @@ Known problems:
 	Client may crash after trying to draw after powering down the orb
 		Location: Client application
 		Possible Remedy: Raise exception to crash more gracefully
+	
+	Wireless data transmission is not foolproof, connection problems may cause program to behanve unexpectedly, or certain drivers or hardware configurations may have trouble connectig (we have not run into any issues yet)
+		Location: Client Bluetooth adapter
+		Possible Remedy: None
