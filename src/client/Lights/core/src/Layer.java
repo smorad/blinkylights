@@ -79,11 +79,11 @@ public class Layer
       advance += glyph.getKerning(letter);
 
 
-      advance += glyph.xadvance -3;    
 
-      pix.drawPixmap(fontPixmap, (int)advance + glyph.xoffset, (3 - (glyph.height + glyph.yoffset)),
+      pix.drawPixmap(fontPixmap, (int)advance + glyph.xoffset, (6 - (glyph.height + glyph.yoffset)),
       glyph.srcX, glyph.srcY, glyph.width, glyph.height);
 
+      advance += glyph.xadvance/1.25;    
 
       last = letter;
 
