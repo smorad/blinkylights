@@ -1,8 +1,12 @@
 Known problems:
-	Client may crash after trying to draw after powering down the orb
+	Client may crash when trying to upload after powering down the hardware.  Unable to detect when a serial port is piped to the actual bluetooth hardware, since the serial ports are an interface with the client host computer & bluetooth and they always appear to be 'open' (even if no actual bluetooth connection is present).
 		Location: Client application
-		Possible Remedy: Raise exception to crash more gracefully
+		Possible Remedy: Rewrite entire bluetooth stack & device driver - infesible.  May be possible to crash more gracefully.
 	
-	Wireless data transmission is not foolproof, connection problems may cause program to behanve unexpectedly, or certain drivers or hardware configurations may have trouble connectig (we have not run into any issues yet)
+	Wireless data transmission is not foolproof, connection problems may cause program to behanve unexpectedly, or certain drivers or hardware configurations may have trouble connecting.  Newer versions of OSX with aggressive hardware power saving features seem to drop Bluetooth connection frequently.
 		Location: Client Bluetooth adapter
-		Possible Remedy: None
+		Possible Remedy: MCU code to detect when bluetooth loses connection - reprogram the bluetooth module to pair with known devices in range when this occurs.
+
+	Transmission error, occasionally the first few bytes that are sent to the LED hardware are garbage bits.  Cause is unknown.  Sometimes this manifests itself as one of the 'first' few LEDs turning on when they should not be.  (one of the LED pixels on the top of the Sphere turns red or green)
+		Location: Client message encoder function or hardware decoder function
+		Possible Remedy: Sending recieved frame data back to client software for inspection.  Have already attempted this without success.  (difficult to do because of moving parts & wired connection impossible).  Must determine cause before solution.

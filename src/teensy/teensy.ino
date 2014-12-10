@@ -27,7 +27,7 @@ const int sensorPin = 9;
 volatile int sensor_flag;
 
 // timing
-#define alpha 0.05
+#define alpha 0.02
 int timeNow;
 int timeLast;
 int rotationTime;
@@ -115,7 +115,7 @@ void loop() {
     
     sensor_flag = 0;
     int now = micros();
-    if (now - timeLast > 20000) {
+    if (now - timeNow > 20000) {
       refreshTimer.end();
       timeLast = timeNow;
       timeNow = now;
