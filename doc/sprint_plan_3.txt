@@ -1,7 +1,7 @@
 Sprint 3 Plan
 Product Name: Light Orb
 Team Name: Blinky Lights
-Sprint Completion Date: 10/29/2014
+Sprint Completion Date: 11/25/2014
 Revision Number: 0.2
 Revision Date: 11/25/2014
 
