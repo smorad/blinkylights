@@ -1,7 +1,7 @@
 Sprint #3 Report
 Light Orb
 Blinky Lights
-11/9/2014
+11/25/2014
 
 What things should we stop doing?
 - Try not to get off topic during the SCRUM meetings.
