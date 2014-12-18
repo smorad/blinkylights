@@ -1,9 +1,9 @@
 Sprint 3 Plan
 Product Name: Light Orb
 Team Name: Blinky Lights
-Sprint Completion Date: ?
+Sprint Completion Date: 10/29/2014
 Revision Number: 0.2
-Revision Date: 11/14/2014
+Revision Date: 11/25/2014
 
 Goal:
 During this sprint, we will ensure that the client and orb work well together. We will also put on the finishing touches.

@@ -1,9 +1,9 @@
 Sprint 2 Plan
 Product Name: Light Orb
 Team Name: Blinky Lights
-Sprint Completion Date: ?
+Sprint Completion Date: 11/12/2014
 Revision Number: 0.1
-Revision Date: 11/3/2014
+Revision Date: 10/29/2014
 
 Goal:
 During this sprint, we will create a drawing canvas app and an app that supports scrollable text that will wireless transfer information through a bluetooth module and show up on the orb.

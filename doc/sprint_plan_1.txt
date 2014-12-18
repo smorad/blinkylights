@@ -1,0 +1,43 @@
+Sprint 1 Plan
+Product Name: Light Orb
+Team Name: Blinky Lights
+Sprint Completion Date: 10/29/2014
+Revision Number: 0.1
+Revision Date: 10/15/2014
+
+Goal:
+During this sprint we will work to put, to put in code to support displaying words to the globe, special effect and a rotation speed control for the hardware
+
+Task Listings:
+(21) As a user I want to see an image appear on the LED orb, so that the LED orb may be used as a display.
+-(3) Research and design motor controller.
+-(10) Build and program motor controller.
+-(4) Install photointerruptor (RMP sensor) for LED controller.
+-(6) Design and program LED orb multiplexion software.
+
+(8) As a user I want a companion application that can conveniently generate media in a format compatible with the LED orb, so that media can be displayed on the LED orb.
+-(1) research ideal programming language to implement companion application.
+-(2) research bluetooth serial communication.
+-(1) design serializable format for displaying images on the LED orb
+-(2) design GUI for the canvas to allow users to create LED orb-compatible media.
+-(5) code LED orb companion app
+ 
+Team Roles:
+Connie: Scrum Master
+David: Team Member
+Kevin: Team member
+Reid: Product Owner
+Steven: Team Member
+
+Initial Task Assignment:
+Connie: 2nd user story, task #1, 5
+David: 2nd user story, task #1, 3
+Kevin: 2nd user story, task #1, 4
+Reid: 1st user story, all tasks
+Steven: 2nd user story, task #1, 2
+
+Initial Burnup Chart and Scrum Board:
+Look on Github account
+
+Scrum Times:
+Monday, Wednesday, Friday before class starts. TA will meet with Blinky Lights on Friday.
