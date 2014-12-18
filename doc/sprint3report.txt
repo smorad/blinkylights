@@ -1,0 +1,31 @@
+Sprint #3 Report
+Light Orb
+Blinky Lights
+11/9/2014
+
+What things should we stop doing?
+- Try not to get off topic during the SCRUM meetings.
+- Bringing up too many implementation details in SCRUM meetings, save those for afterwards.
+
+What things should we start doing? (Kind of moot since this was the last sprint)
+- Put our entire SCRUM board into a program designed for that type of thing.
+- Add future tasks on Trello or some other easily accessible and updatable forum. 
+
+What is working well that we should continue to do?
+- Holding SCRUM meetings regularly, 3 times a week.
+- We should continue communicating on social media. Work gets done when someone asks about it on the Facebook group!
+- Pushing any changes we make quickly to avoid gnarly merges.
+
+Work completed:
+- As a user I want graphics settings for the LED orb, so that the LED orb can display media with additional effects
+
+- As a user I want the companion app to display scrollable text on the LED orb,so that the LED orb may be used to display messages.
+
+-  As a user I want the LED orb to have an adjustable motor power supply, sothat the LED orb frame rate may be controlled.
+
+Work completion rate:
+- total number of user stories completed during sprint: 3 (although we ran into some troubles). Notes: User story 1 was completed. However bluetooth being slow, animation frame rate is too slow to be usable.
+
+- total number of estimated ideal work hours completed during the prior sprint: 25 hours
+- total number of days during the prior sprint: 14 days
+- 1 user story within 14 days. We had 19 possibly story points to complete. We spent 24 hours during the second sprint. Actual rates of work is 1.36 story points per hour. Our ideal work hours/day is approximately 1.79 hours per day.
